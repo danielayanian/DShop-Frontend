@@ -1,0 +1,13 @@
+.btn-ingresar:hover {
+    background-color: #FF5733!important;
+    /*border-color: #fff!important;*/
+    color:fff;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-ingresar {
+    color: #fff!important;
+    background-color: #FFC300!important;
+    /*border-color: #fff!important;*/
+}

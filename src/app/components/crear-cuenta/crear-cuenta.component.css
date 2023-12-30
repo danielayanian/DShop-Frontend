@@ -1,0 +1,16 @@
+.btn-buscar:hover {
+    background-color: #FF5733!important;
+    /*border-color: #fff!important;*/
+    color:fff;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-buscar {
+    color: #fff!important;
+    background-color: #FFC300!important;
+    /*border-color: #fff!important;*/
+}
+
+
+  
