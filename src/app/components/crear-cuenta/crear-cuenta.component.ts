@@ -19,44 +19,77 @@ export class CrearCuentaComponent {
 
   public nombre: string = "";
 
+  public terminosAceptados = true;
+
+  public passwordDiferentes = false;
+
+  public camposVacios = false;
+
   public formularioRegistro: FormGroup<any>;
 
   constructor(private httpClient: HttpClient){
 
     this.formularioRegistro = new FormGroup({
       nombre: new FormControl("", [Validators.required, Validators.minLength(4)]),
+      apellido: new FormControl("", Validators.required),
       email: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required),
       repitaPassword: new FormControl("", Validators.required),
       terminos: new FormControl("")
     });
 
-
-
   }
 
   public registrarUsuario(){
 
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json; charset=utf-8');
+    this.terminosAceptados = this.formularioRegistro.get("terminos")?.value;
 
+    if(!this.terminosAceptados){
+      this.passwordDiferentes = false;
+      this.camposVacios = false;
+      return;
+    }
 
-    const userDTO: UserDTO = new UserDTO();
-    userDTO.nombre = this.formularioRegistro.get("nombre")?.value;
-    userDTO.email = this.formularioRegistro.get("email")?.value;
-    userDTO.password = this.formularioRegistro.get("password")?.value;
-    userDTO.repitaPassword = this.formularioRegistro.get("repitaPassword")?.value;
+    if((this.formularioRegistro.get("nombre")?.value === "")||
+       (this.formularioRegistro.get("apellido")?.value === "")||
+       (this.formularioRegistro.get("email")?.value === "")||
+       (this.formularioRegistro.get("password")?.value === "")||
+       (this.formularioRegistro.get("repitaPassword")?.value === "")){
 
-    this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/registro", JSON.stringify(userDTO),
-     { headers: headers } ).subscribe((data: UserDTO) => {
-        console.log(data);
-      });
+        this.camposVacios = true;
+        this.passwordDiferentes = false;
+        this.terminosAceptados = true;
+        return;
+    }else{
+      this.camposVacios = false;
+    }
 
-      if(this.formularioRegistro.get("terminos")?.value){
-        swal("TRUE");
-      }else{
-        swal("FALSE");
-      }
+    this.passwordDiferentes = (this.formularioRegistro.get("password")?.value != this.formularioRegistro.get("repitaPassword")?.value);
+
+    if(this.passwordDiferentes){
+      this.camposVacios = false;
+      this.terminosAceptados = true;
+      return;
+    }
+
+    if(this.formularioRegistro.get("terminos")?.value){
+
+      const userDTO: UserDTO = new UserDTO();
+      userDTO.nombre = this.formularioRegistro.get("nombre")?.value;
+      userDTO.apellido = this.formularioRegistro.get("apellido")?.value;
+      userDTO.email = this.formularioRegistro.get("email")?.value;
+      userDTO.password = this.formularioRegistro.get("password")?.value;
+
+      const headers = new HttpHeaders()
+        .set('Content-Type', 'application/json; charset=utf-8');
+
+      this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/registro", JSON.stringify(userDTO),
+      { headers: headers } ).subscribe((data: UserDTO) => {
+          console.log(data);
+          swal(data.nombre + " " + data.apellido + " " + data.id);
+        });
+
+    }
       
 
   }
