@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoginDTO } from '../../models/loginDTO';
 import { BASE_ENDPOINT } from '../../config/app';
 import swal from 'sweetalert';
@@ -11,7 +11,7 @@ import { LoginRespuesta } from '../../models/loginRespuesta';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, ReactiveFormsModule ],
+  imports: [ CommonModule, RouterOutlet, ReactiveFormsModule, RouterLink ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

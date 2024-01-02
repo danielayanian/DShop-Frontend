@@ -1,4 +1,4 @@
-.btn-buscar:hover {
+.btn-crear-cuenta:hover {
     background-color: #FF5733!important;
     /*border-color: #fff!important;*/
     color:fff;
@@ -6,7 +6,7 @@
     outline: none;
 }
 
-.btn-buscar {
+.btn-crear-cuenta {
     color: #fff!important;
     background-color: #FFC300!important;
     /*border-color: #fff!important;*/
