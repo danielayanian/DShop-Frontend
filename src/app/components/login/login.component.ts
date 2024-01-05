@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginDTO } from '../../models/loginDTO';
 import { BASE_ENDPOINT } from '../../config/app';
 import swal from 'sweetalert';
@@ -23,7 +23,7 @@ export class LoginComponent {
 
   public hayMensaje: boolean = false;
 
-  constructor(private httpClient: HttpClient){
+  constructor(private httpClient: HttpClient, private router: Router){
 
     this.formularioLogin = new FormGroup({
       email: new FormControl("", Validators.required),
@@ -38,21 +38,42 @@ export class LoginComponent {
       loginDTO.email = this.formularioLogin.get("email")?.value;
       loginDTO.password = this.formularioLogin.get("password")?.value;
 
-      const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json; charset=utf-8');
+      
 
-      this.httpClient.post<LoginRespuesta>(BASE_ENDPOINT+"/login", JSON.stringify(loginDTO),
-      { headers: headers } ).subscribe((data: LoginRespuesta) => {
+let url = 'http://localhost:3030/login';
 
-          if(!data.status){
-            this.hayMensaje = true;
-            this.mensajeError = data.message;
-          }else{
-            this.hayMensaje = false;
-            swal(data.message);
-          }
+let param = {
+  username: 'mary@gmail.com',
+  password: 'root'
+};
+var payload = new HttpParams({ fromObject: param });
 
-        });
+
+let body = new URLSearchParams();
+body.set('username', 'mary@gmail.com');
+body.set('password', 'root');
+
+let options = {
+  headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+  responseType: 'text' as 'text',
+  withCredentials: true
+};
+
+
+
+this.httpClient.post(url, body.toString() , options).subscribe(
+          (data) => {
+            swal(data);
+            if(data.includes("Thisn is publickly accesible")){
+              this.router.navigate(['/']);
+            }else{
+              this.router.navigate(['/login']);
+            }
+            
+          });
+      
+
+
 
   }
 

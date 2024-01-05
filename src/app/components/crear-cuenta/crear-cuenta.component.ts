@@ -79,15 +79,31 @@ export class CrearCuentaComponent {
       userDTO.apellido = this.formularioRegistro.get("apellido")?.value;
       userDTO.email = this.formularioRegistro.get("email")?.value;
       userDTO.password = this.formularioRegistro.get("password")?.value;
+      userDTO.roles = "USER";
 
-      const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json; charset=utf-8');
+      
+      /*let options = {
+        headers: new HttpHeaders(),
+        responseType: 'text' as 'text',
+        withCredentials: true
+      };
 
-      this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/registro", JSON.stringify(userDTO),
-      { headers: headers } ).subscribe((data: UserDTO) => {
+      this.httpClient.get("http://localhost:3030/todo" , options
+        ).subscribe((data) => {
           console.log(data);
-          swal(data.nombre + " " + data.apellido + " " + data.id);
-        });
+          swal(data);
+        });*/
+
+        let options = {
+          headers: new HttpHeaders(),//.set('Content-Type', 'application/json'),
+          withCredentials: true
+        };
+  
+        this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/user/registration", userDTO , options
+          ).subscribe((data: UserDTO) => {
+            console.log(data);
+            swal(data.nombre);
+          });
 
     }
       
