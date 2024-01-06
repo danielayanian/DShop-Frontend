@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -27,7 +27,9 @@ export class CrearCuentaComponent {
 
   public formularioRegistro: FormGroup<any>;
 
-  constructor(private httpClient: HttpClient){
+
+
+  constructor(private httpClient: HttpClient, private router: Router){
 
     this.formularioRegistro = new FormGroup({
       nombre: new FormControl("", [Validators.required, Validators.minLength(4)]),
@@ -81,33 +83,34 @@ export class CrearCuentaComponent {
       userDTO.password = this.formularioRegistro.get("password")?.value;
       userDTO.roles = "USER";
 
-      
-      /*let options = {
-        headers: new HttpHeaders(),
-        responseType: 'text' as 'text',
+      let options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/json'),
         withCredentials: true
       };
 
-      this.httpClient.get("http://localhost:3030/todo" , options
-        ).subscribe((data) => {
-          console.log(data);
-          swal(data);
-        });*/
+      this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/api/user/registration", userDTO , options
+        ).subscribe((data: UserDTO) => {
 
-        let options = {
-          headers: new HttpHeaders(),//.set('Content-Type', 'application/json'),
-          withCredentials: true
-        };
-  
-        this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/user/registration", userDTO , options
-          ).subscribe((data: UserDTO) => {
-            console.log(data);
-            swal(data.nombre);
-          });
+          if(data.id > 0){
+            this.router.navigate(['/login']);
+            swal("Registro exitoso!!! ");
+          }
+
+          if(data.id === -33){
+            swal("El email ingresado ya se encontraba registrado. Ingrese otro, o loguéese!!! ");
+          }
+
+          if(data.id === -32){
+            swal("Un error ha ocurrido. Intente registrarse de nuevo!!! ");
+          }
+
+
+          //console.log(data);
+          //swal(data.id+"");
+      });
 
     }
       
-
   }
 
   ngOnInit(): void {

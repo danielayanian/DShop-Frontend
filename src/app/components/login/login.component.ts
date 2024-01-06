@@ -11,7 +11,7 @@ import { LoginRespuesta } from '../../models/loginRespuesta';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, ReactiveFormsModule, RouterLink ],
+  imports: [CommonModule, RouterOutlet, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -23,7 +23,7 @@ export class LoginComponent {
 
   public hayMensaje: boolean = false;
 
-  constructor(private httpClient: HttpClient, private router: Router){
+  constructor(private httpClient: HttpClient, private router: Router) {
 
     this.formularioLogin = new FormGroup({
       email: new FormControl("", Validators.required),
@@ -32,48 +32,30 @@ export class LoginComponent {
 
   }
 
-  public loginUsuario(){
+  public loginUsuario() {
 
-    const loginDTO: LoginDTO = new LoginDTO();
-      loginDTO.email = this.formularioLogin.get("email")?.value;
-      loginDTO.password = this.formularioLogin.get("password")?.value;
+    let body = new URLSearchParams();
+    body.set('username', this.formularioLogin.get("email")?.value);
+    body.set('password', this.formularioLogin.get("password")?.value);
 
-      
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+      responseType: 'text' as 'text',
+      withCredentials: true
+    };
 
-let url = 'http://localhost:3030/login';
+    this.httpClient.post(BASE_ENDPOINT+"/login", body.toString(), options)
+    .subscribe(
+      (data) => {
+        swal(data);
+        if (data.includes("Login correcto")) {
+          swal("Usted se ha logueado correctamente!!!");
+          this.router.navigate(['/']);
+        } else {
+          swal("Email o contraseña incorrectas, intente nuevamente!!!");
+        }
 
-let param = {
-  username: 'mary@gmail.com',
-  password: 'root'
-};
-var payload = new HttpParams({ fromObject: param });
-
-
-let body = new URLSearchParams();
-body.set('username', 'mary@gmail.com');
-body.set('password', 'root');
-
-let options = {
-  headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-  responseType: 'text' as 'text',
-  withCredentials: true
-};
-
-
-
-this.httpClient.post(url, body.toString() , options).subscribe(
-          (data) => {
-            swal(data);
-            if(data.includes("Thisn is publickly accesible")){
-              this.router.navigate(['/']);
-            }else{
-              this.router.navigate(['/login']);
-            }
-            
-          });
-      
-
-
+      });
 
   }
 
