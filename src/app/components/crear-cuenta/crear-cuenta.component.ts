@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDTO } from '../../models/userDTO';
 import { BASE_ENDPOINT } from '../../config/app';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-crear-cuenta',
@@ -29,7 +30,7 @@ export class CrearCuentaComponent {
 
 
 
-  constructor(private httpClient: HttpClient, private router: Router){
+  constructor(private router: Router, private userService: UserService){
 
     this.formularioRegistro = new FormGroup({
       nombre: new FormControl("", [Validators.required, Validators.minLength(4)]),
@@ -88,8 +89,9 @@ export class CrearCuentaComponent {
         withCredentials: true
       };
 
-      this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/api/user/registration", userDTO , options
-        ).subscribe((data: UserDTO) => {
+      //this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/api/user/registration", userDTO , options)
+      this.userService.postRegist(BASE_ENDPOINT+"/api/user/registration", userDTO , options)
+      .subscribe((data: UserDTO) => {
 
           if(data.id > 0){
             this.router.navigate(['/login']);
@@ -104,9 +106,6 @@ export class CrearCuentaComponent {
             swal("Un error ha ocurrido. Intente registrarse de nuevo!!! ");
           }
 
-
-          //console.log(data);
-          //swal(data.id+"");
       });
 
     }

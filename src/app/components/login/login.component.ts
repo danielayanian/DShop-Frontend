@@ -7,6 +7,8 @@ import { LoginDTO } from '../../models/loginDTO';
 import { BASE_ENDPOINT } from '../../config/app';
 import swal from 'sweetalert';
 import { LoginRespuesta } from '../../models/loginRespuesta';
+import { UserDTO } from '../../models/userDTO';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,8 @@ export class LoginComponent {
 
   public hayMensaje: boolean = false;
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private router: Router, 
+    private userService: UserService) {
 
     this.formularioLogin = new FormGroup({
       email: new FormControl("", Validators.required),
@@ -44,13 +47,25 @@ export class LoginComponent {
       withCredentials: true
     };
 
-    this.httpClient.post(BASE_ENDPOINT+"/login", body.toString(), options)
+    this.userService.postLogin(BASE_ENDPOINT+"/login", body.toString(), options)
     .subscribe(
       (data) => {
         swal(data);
         if (data.includes("Login correcto")) {
           swal("Usted se ha logueado correctamente!!!");
-          this.router.navigate(['/']);
+
+      
+          let options2 = {
+            withCredentials: true
+          };
+
+          this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options2)
+          .subscribe(
+            (data: UserDTO) => {
+              this.router.navigate(['inicio/' + data.nombre]);
+            }
+          );
+
         } else {
           swal("Email o contraseña incorrectas, intente nuevamente!!!");
         }
