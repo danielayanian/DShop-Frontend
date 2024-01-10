@@ -9,7 +9,7 @@
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-      <span style="font-size: large">&nbsp;Menú</span>
+      <!--<span style="font-size: large">&nbsp;Menú</span>-->
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,9 +21,21 @@
             Categorías
           </a>
           <ul class="dropdown-menu categorias-fondo">
-            <li><a class="dropdown-item categorias-option" href="#">Action</a></li>
-            <li><a class="dropdown-item categorias-option" href="#">Another action</a></li>
-            <li><a class="dropdown-item categorias-option" href="#">Something else here</a></li>
+            <li><a class="dropdown-item categorias-option"
+              routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show">
+              Action
+            </a></li>
+            <li><a class="dropdown-item categorias-option"
+              routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show">
+              Another action
+            </a></li>
+            <li><a class="dropdown-item categorias-option" 
+              routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show">
+              Something else here
+            </a></li>
           </ul>
         </li>
 
@@ -45,13 +57,21 @@
 
         <form role="search" class="d-flex flex-row align-items-baseline justify-content-center flex-grow-1">
           <input class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
-          <button class="btn btn-buscar" type="submit">Buscar</button>
+          <button class="btn btn-buscar" type="button" (click)="buscar()">Buscar</button>
         </form>
       </div>
 
+      <!-- cambiar acá para que el dropdown quede largo hasta el final-->
       <div class="d-flex flex-row align-items-baseline flex-basis-auto">
 
+
+
+        
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+
+          @if(userLogueado() === 'false'){
 
           <li class="nav-item">
             <a class="nav-link" routerLink="/crear-cuenta" routerLinkActive="active" data-bs-toggle="collapse"
@@ -63,6 +83,36 @@
             <a class="nav-link" routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
             data-bs-target=".navbar-collapse.show">Ingresá</a>
           </li>
+
+        } @else {
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn-categorias" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{userNombre()}}
+            </a>
+            <ul class="dropdown-menu categorias-fondo dropdown-menu-end">
+              <li><a class="dropdown-item categorias-option"
+                routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
+                data-bs-target=".navbar-collapse.show">
+                Mi perfil
+              </a></li>
+              <li><a class="dropdown-item categorias-option"
+                routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
+                data-bs-target=".navbar-collapse.show">
+                Mis compras
+              </a></li>
+              <li><a class="dropdown-item categorias-option" (click)="logout()"
+                routerLink="/logout" routerLinkActive="active" data-bs-toggle="collapse"
+                data-bs-target=".navbar-collapse.show">
+                Cerrar sesión
+              </a></li>
+            </ul>
+          </li>
+
+      
+
+        }
 
           <li class="d-flex">
             <a class="navbar-brand" [routerLink]="['inicio/', 'dani']" routerLinkActive="active" class="d-flex align-items-center">
