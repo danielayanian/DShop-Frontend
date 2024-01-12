@@ -11,3 +11,19 @@
 .textoColor-4 {color: #DAF7A6;}
 .textoColor-5 {color: #FFC300;}
 .textoColor-6 {color: #FF5733;}
+
+.custom-checkbox {
+    border-color: #FFC300!important;
+    box-shadow: none!important;
+}
+.custom-checkbox:checked {
+    /* Elimino los estilos del navegaror */
+    appearance: none!important;
+    /* Aplico mis estilos */
+    background-color: #FF5733!important;
+    border-color: #FF5733!important;
+}
+
+.text-naranja {
+    color :#FF5733!important;
+}

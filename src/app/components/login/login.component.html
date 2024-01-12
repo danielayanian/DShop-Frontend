@@ -38,14 +38,14 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- Checkbox -->
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+              <input class="custom-checkbox form-check-input" type="checkbox" value="" id="form2Example31" checked />
               <label class="form-check-label" for="form2Example31">Recordarme</label>
             </div>
           </div>
 
           <div class="col">
             <!-- Simple link -->
-            <a href="#!">Olvidó su contraseña?</a>
+            <a href="#!" class="text-naranja">Olvidó su contraseña?</a>
           </div>
           &nbsp;&nbsp;&nbsp;
 
@@ -53,7 +53,7 @@
 
         <!-- Submit button -->
         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-        <button type="button" (click)="loginUsuario()" class="btn btn-ingresar btn-block mb-4">Ingresar</button>
+        <button type="submit" (click)="loginUsuario()" class="btn btn-ingresar btn-block mb-4">Ingresar</button>
       </div>
         @if (hayMensaje) {
 
@@ -70,7 +70,7 @@
 
         <!-- Register buttons -->
         <div class="text-center">
-          <p>No sos miembro? <a routerLink="/crear-cuenta">Registrate</a></p>
+          <p>No sos miembro? <a routerLink="/crear-cuenta" class="text-naranja">Registrate</a></p>
         </div>
       </form>
 
