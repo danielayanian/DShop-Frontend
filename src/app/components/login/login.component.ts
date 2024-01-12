@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { LoginDTO } from '../../models/loginDTO';
 import { BASE_ENDPOINT } from '../../config/app';
 import swal from 'sweetalert';
-import { LoginRespuesta } from '../../models/loginRespuesta';
 import { UserDTO } from '../../models/userDTO';
 import { UserService } from '../../services/user/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -28,12 +27,13 @@ export class LoginComponent implements OnInit {
 
   public camposVacios = false;
 
-  constructor(private router: Router, 
+  constructor(private router: Router, private cookieService: CookieService,
     private userService: UserService) {
 
     this.formularioLogin = new FormGroup({
       email: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required)
+      password: new FormControl("", Validators.required),
+      recordarme: new FormControl("")
     });
 
   }
@@ -69,10 +69,18 @@ export class LoginComponent implements OnInit {
       (data) => {
         if (data.includes("Login correcto")) {
 
-          //this.cookieService.set('userLogueado', 'true');
           sessionStorage.setItem('userLogueado', 'true');
 
           swal("Usted se ha logueado correctamente!!!");
+
+          //Si el login esta marcado como recordar, guardo email y password en cookies
+          if(this.formularioLogin.get("recordarme")?.value){
+            this.cookieService.set('email', this.formularioLogin.get("email")?.value);
+            this.cookieService.set('password', this.formularioLogin.get("password")?.value);
+          }/*else{
+            this.cookieService.set('email', '');
+            this.cookieService.set('password', '');
+          }*/
 
           let options2 = {
             withCredentials: true
@@ -82,27 +90,21 @@ export class LoginComponent implements OnInit {
           .subscribe(
             (data: UserDTO) => {
 
-              //this.cookieService.set('userNombre', data.nombre);
               sessionStorage.setItem('userNombre', data.nombre);
               sessionStorage.setItem('roles', data.roles);
-              //this.cookieService.set('userLogueado', 'true');
 
               this.router.navigate(['inicio/' + data.nombre]);
 
             }
           );
 
-
-
-            //Preguntar si esta marcado el recordarme, y en ese caso
-            //crear cookie para user y pass, y que la pagina de login siempre
-            //al cargarse lea esas cookies y si existen cargue los valores en los inputs
-
-
-
-
         } else {
-          swal("Email o contraseña incorrectas, intente nuevamente!!!");
+
+          Swal.fire({text: "Email o contraseña incorrectas, intente nuevamente!!!",
+          confirmButtonColor: '#FFC300',
+          confirmButtonText: 'Cerrar'});
+
+          //swal({confirmButtonColor: '#8CD4F5'}, "Email o contraseña incorrectas, intente nuevamente!!!");
         }
 
       });
@@ -111,9 +113,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.cookieService.set('userLogueado', 'true', 365);
+    //Si el login fue marcado como recordar, carga los datos guardados en las cookies
+    this.formularioLogin.controls['email'].setValue(this.cookieService.get('email'));
+    this.formularioLogin.controls['password'].setValue(this.cookieService.get('password'));
 
-    
   }
 
 }
