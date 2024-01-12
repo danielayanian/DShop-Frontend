@@ -26,6 +26,16 @@ export class CrearCuentaComponent {
 
   public camposVacios = false;
 
+  public nombreIncorrecto = false;
+
+  public apellidoIncorrecto = false;
+
+  public emailIncorrecto = false;
+
+  public passwordIncorrecto = false;
+
+  public passwordRepetidoIncorrecto = false;
+
   public formularioRegistro: FormGroup<any>;
 
 
@@ -44,6 +54,15 @@ export class CrearCuentaComponent {
   }
 
   public registrarUsuario(){
+
+    this.terminosAceptados = true;
+    this.passwordDiferentes = false;
+    this.camposVacios = false;
+    this.nombreIncorrecto = false;
+    this.apellidoIncorrecto = false;
+    this.emailIncorrecto = false;
+    this.passwordIncorrecto = false;
+    this.passwordRepetidoIncorrecto = false;
 
     this.terminosAceptados = this.formularioRegistro.get("terminos")?.value;
 
@@ -65,6 +84,36 @@ export class CrearCuentaComponent {
         return;
     }else{
       this.camposVacios = false;
+    }
+
+    let nombre = this.formularioRegistro.get("nombre")?.value;
+    if(nombre.match("^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$") === null){
+      this.nombreIncorrecto = true;
+      return;
+    }
+
+    let apellido = this.formularioRegistro.get("apellido")?.value;
+    if(apellido.match("^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$") === null){
+      this.apellidoIncorrecto = true;
+      return;
+    }
+
+    let email = this.formularioRegistro.get("email")?.value;
+    if(email.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/) === null){
+      this.emailIncorrecto = true;
+      return;
+    }
+
+    let password = this.formularioRegistro.get("password")?.value;
+    if(password.match(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/) === null){
+      this.passwordIncorrecto = true;
+      return;
+    }
+
+    let passwordRepetido = this.formularioRegistro.get("repitaPassword")?.value;
+    if(passwordRepetido.match(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/) === null){
+      this.passwordRepetidoIncorrecto = true;
+      return;
     }
 
     this.passwordDiferentes = (this.formularioRegistro.get("password")?.value != this.formularioRegistro.get("repitaPassword")?.value);

@@ -58,8 +58,6 @@
       </div>
 
       <div class="d-flex flex-row flex-grow-1">
-
-
         <form role="search" class="d-flex flex-row align-items-baseline justify-content-center flex-grow-1">
           <input class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
           <button class="btn btn-buscar" type="button" (click)="buscar()" data-bs-toggle="collapse"
@@ -86,8 +84,17 @@
 
           } @else {
 
+            @if(getRolOfUser() === 'ADMIN'){
+
+              <li class="nav-item">
+                <a class="nav-link texto-administrar" routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
+                  data-bs-target=".navbar-collapse.show">Administrar&nbsp;</a>
+              </li>
+
+            }
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn-categorias" href="#" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle btn-categorias" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               {{userNombre()}}
             </a>

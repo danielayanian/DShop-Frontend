@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
       sessionStorage.setItem('userLogueado', 'false');
 
       sessionStorage.removeItem('userNombre');
+      sessionStorage.removeItem('roles');
     
     }
 
@@ -74,6 +75,11 @@ export class NavbarComponent implements OnInit {
       }
     );
 
+  }
+
+  public getRolOfUser(){
+
+    return sessionStorage.getItem('roles');
 
   }
     

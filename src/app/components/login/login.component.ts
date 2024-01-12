@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
 
   public hayMensaje: boolean = false;
 
+  public camposVacios = false;
+
   constructor(private router: Router, 
-    private userService: UserService,
-    private cookieService: CookieService) {
+    private userService: UserService) {
 
     this.formularioLogin = new FormGroup({
       email: new FormControl("", Validators.required),
@@ -38,6 +39,20 @@ export class LoginComponent implements OnInit {
   }
 
   public loginUsuario() {
+
+    this.camposVacios = false;
+
+    if((this.formularioLogin.get("email")?.value === "")||
+       (this.formularioLogin.get("password")?.value === "")){
+
+        this.camposVacios = true;
+        return;
+
+    }else{
+
+      this.camposVacios = false;
+
+    }
 
     let body = new URLSearchParams();
     body.set('username', this.formularioLogin.get("email")?.value);
@@ -69,12 +84,22 @@ export class LoginComponent implements OnInit {
 
               //this.cookieService.set('userNombre', data.nombre);
               sessionStorage.setItem('userNombre', data.nombre);
+              sessionStorage.setItem('roles', data.roles);
               //this.cookieService.set('userLogueado', 'true');
 
               this.router.navigate(['inicio/' + data.nombre]);
 
             }
           );
+
+
+
+            //Preguntar si esta marcado el recordarme, y en ese caso
+            //crear cookie para user y pass, y que la pagina de login siempre
+            //al cargarse lea esas cookies y si existen cargue los valores en los inputs
+
+
+
 
         } else {
           swal("Email o contraseña incorrectas, intente nuevamente!!!");

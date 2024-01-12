@@ -74,29 +74,107 @@
                       </div>
                     </div>
                   
-                  }
+                  } @else{
 
-                  @if (passwordDiferentes) {
+                      @if (camposVacios) {
 
-                    <div class="alert alert-danger d-flex align-items-center" role="alert">
-                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                      <div>
-                        Las contraseñas ingresadas son diferentes
-                      </div>
-                    </div>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                          <div>
+                            Debe completar todos los campos
+                          </div>
+                        </div>
+                      
+                      }@else {
+
+                        @if (nombreIncorrecto) {
+
+                          <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                            <div>
+                              El campo nombre solo debe contener letras
+                            </div>
+                          </div>
+                        
+                        }@else {
+
+                          @if (apellidoIncorrecto) {
+
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                              <div>
+                                El campo apellido solo debe contener letras
+                              </div>
+                            </div>
+                          
+                          }@else {
+
+                            @if (emailIncorrecto) {
+
+                              <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                <div>
+                                  Debe ingresar un email válido
+                                </div>
+                              </div>
+                            
+                            }@else {
+
+                              @if (passwordIncorrecto) {
+
+                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                  <div>
+                                    La contraseña debe tener un mínimo de 8 caracteres, y al menos una letra minúscula, una letra mayúscula, un número y un carácter especial
+                                  </div>
+                                </div>
+                              
+                              }@else {
+
+                                @if (passwordRepetidoIncorrecto) {
+
+                                  <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                    <div>
+                                      La contraseña debe tener un mínimo de 8 caracteres, y al menos una letra minúscula, una letra mayúscula, un número y un carácter especial
+                                    </div>
+                                  </div>
+                                
+                                }@else {
+
+                                  @if (passwordDiferentes) {
+
+                                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      <div>
+                                        Las contraseñas ingresadas son diferentes
+                                      </div>
+                                    </div>
+                                  
+                                  }
+
+                                } 
+
+                              }
+
+                              
+
+                            } 
+
+                          } 
+
+                        }
+
+                      }
+                }
+
                   
-                  }
 
-                  @if (camposVacios) {
-
-                    <div class="alert alert-danger d-flex align-items-center" role="alert">
-                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                      <div>
-                        Debe completar todos los campos
-                      </div>
-                    </div>
                   
-                  }
+
+                  
+
+                  
 
                 </form>
 

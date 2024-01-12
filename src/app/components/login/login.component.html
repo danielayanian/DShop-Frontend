@@ -45,7 +45,7 @@
 
           <div class="col">
             <!-- Simple link -->
-            <a href="#!" class="text-naranja">Olvidó su contraseña?</a>
+            <a routerLink="/login" routerLinkActive="active" class="text-naranja">Olvidó su contraseña?</a>
           </div>
           &nbsp;&nbsp;&nbsp;
 
@@ -55,6 +55,18 @@
         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
         <button type="submit" (click)="loginUsuario()" class="btn btn-ingresar btn-block mb-4">Ingresar</button>
       </div>
+
+        @if (camposVacios) {
+
+          <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+              Debe completar todos los campos
+            </div>
+          </div>
+        
+        }
+
         @if (hayMensaje) {
 
         <div class="alert alert-danger d-flex align-items-center" role="alert">

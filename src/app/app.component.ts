@@ -23,6 +23,7 @@ export class AppComponent implements OnDestroy {
 
     sessionStorage.removeItem('userLogueado');
     sessionStorage.removeItem('userNombre');
+    sessionStorage.removeItem('roles');
 
   }
 
