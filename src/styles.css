@@ -27,3 +27,13 @@
 .text-naranja {
     color :#FF5733!important;
 }
+
+/*Tamano texto de ventana Swal*/
+.swal2-popup {
+    font-size: 11px !important;
+    color:#16a085 !important;
+    padding-inline-start: 0px!important;
+    padding-inline-end: 0px!important;
+    padding-top: 5px!important;
+    padding-bottom: 30px!important;
+}

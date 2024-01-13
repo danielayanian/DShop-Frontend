@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpHeaders } from '@angular/common/http';
 import { UserDTO } from '../../models/userDTO';
 import { BASE_ENDPOINT } from '../../config/app';
 import { UserService } from '../../services/user/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-cuenta',
@@ -19,26 +19,15 @@ import { UserService } from '../../services/user/user.service';
 export class CrearCuentaComponent {
 
   public nombre: string = "";
-
   public terminosAceptados = true;
-
   public passwordDiferentes = false;
-
   public camposVacios = false;
-
   public nombreIncorrecto = false;
-
   public apellidoIncorrecto = false;
-
   public emailIncorrecto = false;
-
   public passwordIncorrecto = false;
-
   public passwordRepetidoIncorrecto = false;
-
   public formularioRegistro: FormGroup<any>;
-
-
 
   constructor(private router: Router, private userService: UserService){
 
@@ -138,21 +127,35 @@ export class CrearCuentaComponent {
         withCredentials: true
       };
 
-      //this.httpClient.post<UserDTO>(BASE_ENDPOINT+"/api/user/registration", userDTO , options)
       this.userService.postRegist(BASE_ENDPOINT+"/api/user/registration", userDTO , options)
       .subscribe((data: UserDTO) => {
 
           if(data.id > 0){
             this.router.navigate(['/login']);
-            swal("Registro exitoso!!! ");
+            Swal.fire({
+              icon: "success",
+              title: "Registro exitoso!!!",
+              showConfirmButton: false,
+              timer: 3000
+            });
           }
 
           if(data.id === -33){
-            swal("El email ingresado ya se encontraba registrado. Ingrese otro, o loguéese!!! ");
+            Swal.fire({
+              icon: "error",
+              title: "El email ingresado ya se encontraba registrado. Ingrese otro, o loguéese!!!",
+              showConfirmButton: true,
+              timer: 3000
+            });
           }
 
           if(data.id === -32){
-            swal("Un error ha ocurrido. Intente registrarse de nuevo!!! ");
+          Swal.fire({
+              icon: "error",
+              title: "Un error ha ocurrido. Intente registrarse de nuevo!!!",
+              showConfirmButton: false,
+              timer: 3000
+            });
           }
 
       });
@@ -161,8 +164,6 @@ export class CrearCuentaComponent {
       
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
 }

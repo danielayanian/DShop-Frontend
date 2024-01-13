@@ -4,7 +4,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BASE_ENDPOINT } from '../../config/app';
-import swal from 'sweetalert';
 import { UserDTO } from '../../models/userDTO';
 import { UserService } from '../../services/user/user.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -71,7 +70,12 @@ export class LoginComponent implements OnInit {
 
           sessionStorage.setItem('userLogueado', 'true');
 
-          swal("Usted se ha logueado correctamente!!!");
+          Swal.fire({
+            icon: "success",
+            title: "Usted se ha logueado correctamente!!!",
+            showConfirmButton: false,
+            timer: 3000
+          });
 
           //Si el login esta marcado como recordar, guardo email y password en cookies
           if(this.formularioLogin.get("recordarme")?.value){
@@ -100,11 +104,13 @@ export class LoginComponent implements OnInit {
 
         } else {
 
-          Swal.fire({text: "Email o contraseña incorrectas, intente nuevamente!!!",
-          confirmButtonColor: '#FFC300',
-          confirmButtonText: 'Cerrar'});
+          Swal.fire({
+            icon: "error",
+            title: "Email o contraseña incorrectas, intente nuevamente!!!",
+            showConfirmButton: false,
+            timer: 3000
+          });
 
-          //swal({confirmButtonColor: '#8CD4F5'}, "Email o contraseña incorrectas, intente nuevamente!!!");
         }
 
       });
