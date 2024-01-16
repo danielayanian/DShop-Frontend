@@ -20,13 +20,10 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 export class InicioComponent implements OnInit {
 
   products: Product[] = [];
-  pageSize = 12;
+  pageSize = 5;
   pageIndex = 0;
   totalItems = 0;
   pageSizeOptions: number[] = [5, 12, 24, 36];
-  //columnas: string[] = ['id', 'nombre', 'precio'];
-  //datos: Product[] = [];
-  //dataSource:any;
 
   constructor(private http: HttpClient, private productService: ProductService) { }
 
