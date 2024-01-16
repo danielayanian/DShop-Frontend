@@ -5,7 +5,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HttpHeaders } from '@angular/common/http';
 import { BASE_ENDPOINT } from './config/app';
-import { UserService } from './services/user/user.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',

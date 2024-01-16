@@ -1,29 +1,48 @@
 <section class="vh-70" style="background-color: #DAF7A6;">
+
     <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-12 col-xl-11">
-        
-        
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
-            <p>{{nombre}}</p>
+        <div class="row d-flex justify-content-center align-items-center h-100">
 
-            
+            <div class="col-lg-12 col-xl-11 mt-3">
 
-        
-        
-        </div></div></div></section>
+                @if(products.length>0){
+
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (product of products; track product.id){
+
+                        <tr>
+                            <td>
+                                <div>
+                                    <app-product-card [product]="product"></app-product-card>
+                                </div>
+                            </td>
+                        </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+
+                }
+
+                <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [pageSizeOptions]="pageSizeOptions" [length]="totalItems" (page)="onPageChange($event)"
+                    aria-label="Select page" showFirstLastButtons
+                    class="d-flex justify-content-center align-items-center paginator"></mat-paginator>
 
 
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+            </div>
 
+        </div>
+    </div>
+</section>

@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BASE_ENDPOINT } from '../../config/app';
 import { UserDTO } from '../../models/userDTO';
-import { UserService } from '../../services/user/user.service';
+import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 

@@ -1,20 +1,55 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
+import { customPaginator } from '../custom-paginator-configuration';
+import { HttpClient } from '@angular/common/http';
+import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
   selector: 'app-inicio',
-  standalone: true,
-  imports: [],
   templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css'
+  styleUrl: './inicio.component.css',
+  standalone: true,
+  imports: [ MatPaginatorModule, ProductCardComponent ],
+  //Esto es para personalizar el paginator
+  providers: [
+    { provide: MatPaginatorIntl, useValue: customPaginator() }
+  ]
 })
-export class InicioComponent {
+export class InicioComponent implements OnInit {
 
-  public nombre: any;
+  products: Product[] = [];
+  pageSize = 12;
+  pageIndex = 0;
+  totalItems = 0;
+  pageSizeOptions: number[] = [5, 12, 24, 36];
+  //columnas: string[] = ['id', 'nombre', 'precio'];
+  //datos: Product[] = [];
+  //dataSource:any;
 
-  constructor(private _route: ActivatedRoute){
+  constructor(private http: HttpClient, private productService: ProductService) { }
+
+  ngOnInit(): void {
+
+    this.loadCards();    
+
+  }
   
-    this.nombre = String(this._route.snapshot.paramMap.get('nombre'));
+  loadCards() {
+    
+    this.productService.listarPaginas(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
+      this.products = data.content;
+      this.totalItems = data.totalElements;
+    });
+    
+  }
+
+  onPageChange(event: any) {
+
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadCards();
 
   }
 

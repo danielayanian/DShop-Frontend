@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import swal from 'sweetalert';
-import { UserService } from '../../services/user/user.service';
+import { UserService } from '../../services/user.service';
 import { BASE_ENDPOINT } from '../../config/app';
 import { UserDTO } from '../../models/userDTO';
 import { HttpHeaders } from '@angular/common/http';

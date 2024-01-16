@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import {HttpHeaders } from '@angular/common/http';
 import { UserDTO } from '../../models/userDTO';
 import { BASE_ENDPOINT } from '../../config/app';
-import { UserService } from '../../services/user/user.service';
+import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({

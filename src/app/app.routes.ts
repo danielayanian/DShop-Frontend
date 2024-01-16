@@ -5,8 +5,8 @@ import { CrearCuentaComponent } from './components/crear-cuenta/crear-cuenta.com
 import { InicioComponent } from './components/inicio/inicio.component';
 
 export const routes: Routes = [
-    /*{path:"", pathMatch: 'full', redirectTo: 'inicio'},
-    path:"inicio", component:AppComponent},*/
+    {path:"", pathMatch: 'full', redirectTo: 'inicio'},
+    {path:"inicio", component:InicioComponent},
     {path:"crear-cuenta", component:CrearCuentaComponent},
     {path:"login", component:LoginComponent},
     {path:"logout", component:InicioComponent},
