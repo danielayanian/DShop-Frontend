@@ -1,43 +1,128 @@
-.fondoColor-1 {background-color: #16a085;}
-.fondoColor-2 {color: #27ae60;}
-.color-3 {color: #229954;}
-.fondoColor-4 {color: #DAF7A6;}
-.color-5 {color: #FFC300;}
-.color-6 {color: #FF5733;}
+.fondoColor-1 {
+  background-color: #16a085;
+}
 
-.textoColor-1 {color: #16a085;}
-.textoColor-2 {color: #27ae60;}
-.textoColor-3 {color: #229954;}
-.textoColor-4 {color: #DAF7A6;}
-.textoColor-5 {color: #FFC300;}
-.textoColor-6 {color: #FF5733;}
+.fondoColor-2 {
+  color: #27ae60;
+}
+
+.color-3 {
+  color: #229954;
+}
+
+.fondoColor-4 {
+  color: #DAF7A6;
+}
+
+.color-5 {
+  color: #FFC300;
+}
+
+.color-6 {
+  color: #FF5733;
+}
+
+.textoColor-1 {
+  color: #16a085;
+}
+
+.textoColor-2 {
+  color: #27ae60;
+}
+
+.textoColor-3 {
+  color: #229954;
+}
+
+.textoColor-4 {
+  color: #DAF7A6;
+}
+
+.textoColor-5 {
+  color: #FFC300;
+}
+
+.textoColor-6 {
+  color: #FF5733;
+}
 
 .custom-checkbox {
-    border-color: #FFC300!important;
-    box-shadow: none!important;
+  border-color: #FFC300 !important;
+  box-shadow: none !important;
 }
+
 .custom-checkbox:checked {
-    /* Elimino los estilos del navegaror */
-    appearance: none!important;
-    /* Aplico mis estilos */
-    background-color: #FF5733!important;
-    border-color: #FF5733!important;
+  /* Elimino los estilos del navegaror */
+  appearance: none !important;
+  /* Aplico mis estilos */
+  background-color: #FF5733 !important;
+  border-color: #FF5733 !important;
 }
 
 .text-naranja {
-    color :#FF5733!important;
+  color: #FF5733 !important;
 }
 
 /*Tamano texto de ventana Swal*/
 .swal2-popup {
-    font-size: 11px !important;
-    color:#16a085 !important;
-    padding-inline-start: 0px!important;
-    padding-inline-end: 0px!important;
-    padding-top: 5px!important;
-    padding-bottom: 30px!important;
+  font-size: 11px !important;
+  color: #16a085 !important;
+  padding-inline-start: 0px !important;
+  padding-inline-end: 0px !important;
+  padding-top: 5px !important;
+  padding-bottom: 30px !important;
 }
 
-.paginator {
-    background-color: #FFC300!important;
+/* Estilos del paginador: */
+
+.mat-mdc-paginator-page-size-select {
+  width: 80px !important;
+  background-color: #FFC300 !important;
+  font-size: 15px !important;
+  border-color: #FFC300 !important;
+  border-radius: 5px !important;
 }
+
+.mat-mdc-option {
+  font-size: 15px !important;
+  min-height: 35px !important;
+  background-color: #FFC300 !important;
+  color: #16a085 !important;
+  width: 100% !important;
+
+}
+
+.mat-mdc-option:hover {
+  background-color: #FF5733 !important;
+  color: #DAF7A6 !important;
+
+}
+
+mat-paginator {
+  background-color: #16a085 !important;
+  color: #DAF7A6 !important;
+  font-size: 15px !important;
+
+}
+
+mat-select {
+  color: #16a085 !important;
+
+}
+
+.mdc-notched-outline__leading,
+.mdc-notched-outline__trailing {
+  border-color: #FFC300 !important;
+  font-size: 15px !important;
+}
+
+.mat-mdc-select,
+.mat-mdc-select-value .mat-mdc-select-value-text {
+  font-size: 15px !important;
+}
+
+
+.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
+  color: #DAF7A6 !important;
+}
+

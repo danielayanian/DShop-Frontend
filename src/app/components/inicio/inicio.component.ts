@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { customPaginator } from '../custom-paginator-configuration';
 import { HttpClient } from '@angular/common/http';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-inicio',
