@@ -12,16 +12,17 @@
 
                     @for (product of products; track product.id){
 
-                    <div class="col">
-                      <div class="card">
-                        <img src="assets/images/tv1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title textoColor-6">{{ product.nombre }}</h5>
-                          <p class="card-text">{{ product.precio }}</p>
+                    <a href="#" (click)="openPublication(product.id)">
+                      <div class="col">
+                        <div class="card">
+                          <img src="assets/images/tv1.jpg" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title textoColor-product-title">{{ product.titulo }}</h5>
+                            <p class="card-text textoColor-product-price">$ {{ product.precio }}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-
+                    </a>
                 }
 
                 </div>

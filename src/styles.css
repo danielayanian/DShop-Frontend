@@ -126,3 +126,15 @@ mat-select {
   color: #DAF7A6 !important;
 }
 
+a {
+  text-decoration: none;
+}
+
+.textoColor-product-price {
+  color: black;
+  font-weight: bold;
+}
+
+.textoColor-product-title {
+  color: #FF5733;
+}

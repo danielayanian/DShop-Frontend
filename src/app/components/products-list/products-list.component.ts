@@ -5,12 +5,12 @@ import { ProductService } from '../../services/product.service';
 import { customPaginator } from '../custom-paginator-configuration';
 import { HttpClient } from '@angular/common/http';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { ThemePalette } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css',
+  selector: 'app-products-list',
+  templateUrl: './products-list.component.html',
+  styleUrl: './products-list.component.css',
   standalone: true,
   imports: [ MatPaginatorModule, ProductCardComponent ],
   //Esto es para personalizar el paginator
@@ -18,7 +18,7 @@ import { ThemePalette } from '@angular/material/core';
     { provide: MatPaginatorIntl, useValue: customPaginator() }
   ]
 })
-export class InicioComponent implements OnInit {
+export class ProductsListComponent implements OnInit {
 
   products: Product[] = [];
   pageSize = 5;
@@ -26,7 +26,8 @@ export class InicioComponent implements OnInit {
   totalItems = 0;
   pageSizeOptions: number[] = [5, 12, 24, 36];
 
-  constructor(private http: HttpClient, private productService: ProductService) { }
+  constructor(private http: HttpClient, private productService: ProductService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -48,6 +49,13 @@ export class InicioComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadCards();
+
+  }
+
+  openPublication(id: number){
+
+    this.router.navigate(['publication/' + id]);
+    return false;
 
   }
 

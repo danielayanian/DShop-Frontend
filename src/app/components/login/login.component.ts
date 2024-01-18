@@ -81,10 +81,7 @@ export class LoginComponent implements OnInit {
           if(this.formularioLogin.get("recordarme")?.value){
             this.cookieService.set('email', this.formularioLogin.get("email")?.value);
             this.cookieService.set('password', this.formularioLogin.get("password")?.value);
-          }/*else{
-            this.cookieService.set('email', '');
-            this.cookieService.set('password', '');
-          }*/
+          }
 
           let options2 = {
             withCredentials: true
@@ -97,7 +94,7 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('userNombre', data.nombre);
               sessionStorage.setItem('roles', data.roles);
 
-              this.router.navigate(['inicio/' + data.nombre]);
+              this.router.navigate(['products-list/inicio']);
 
             }
           );

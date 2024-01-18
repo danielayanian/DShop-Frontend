@@ -27,10 +27,6 @@ export class NavbarComponent implements OnInit {
       sessionStorage.removeItem('roles');
     
     }
-
-    /*if(this.cookieService.check('userLogueado') === false){
-      this.cookieService.set('userLogueado', 'false');//365
-    }*/
     
   }
 
@@ -48,8 +44,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.cookieService.set('userLogueado', 'false', 365);
-
   }
 
   public logout(): void{
@@ -64,13 +58,8 @@ export class NavbarComponent implements OnInit {
     .subscribe(
       (data) => {
 
-        //this.cookieService.set('userLogueado', 'false');
         sessionStorage.setItem('userLogueado', 'false');
         sessionStorage.removeItem('userNombre');
-
-        /*if(data.includes("Please sign in")){
-          this.cookieService.set('userLogueado', 'false', 365);
-        }*/
         
       }
     );
