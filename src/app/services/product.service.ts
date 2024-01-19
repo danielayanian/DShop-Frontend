@@ -16,11 +16,39 @@ import { BASE_ENDPOINT } from "../config/app";
       this.http = http;
     }
 
-    public listarPaginas(page: string, size: string): Observable<any>{
+    public listarDestacados(page: string, size: string): Observable<any>{
       const params = new HttpParams()
       .set('page', page)
       .set('size', size);
-      return this.http.get<any>(BASE_ENDPOINT+'/pagina', {params: params});
+      return this.http.get<any>(BASE_ENDPOINT+'/listarDestacados', {params: params});
+    }
+
+    public listarOfertas(page: string, size: string): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+      return this.http.get<any>(BASE_ENDPOINT+'/listarOfertas', {params: params});
+    }
+
+    public listarTelevisores(page: string, size: string): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+      return this.http.get<any>(BASE_ENDPOINT+'/listarTelevisores', {params: params});
+    }
+
+    public listarCelulares(page: string, size: string): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+      return this.http.get<any>(BASE_ENDPOINT+'/listarCelulares', {params: params});
+    }
+
+    public listarNotebooks(page: string, size: string): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+      return this.http.get<any>(BASE_ENDPOINT+'/listarNotebooks', {params: params});
     }
 
 }

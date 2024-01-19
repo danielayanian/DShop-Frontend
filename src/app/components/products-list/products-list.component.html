@@ -1,41 +1,39 @@
 <section class="vh-70" style="background-color: #DAF7A6;">
 
-    <div class="container h-100 mt-3">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="container h-100 mt-3">
+    <div class="row d-flex justify-content-center align-items-center h-100">
 
-            <div class="col-lg-12 col-xl-11 mt-3">
+      <div class="col-lg-12 col-xl-11 mt-3">
 
+        <div class="row row-cols-1 row-cols-md-3 g-4">
 
+          @for (product of products; track product.id) {
 
-
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-
-                    @for (product of products; track product.id){
-
-                    <a href="#" (click)="openPublication(product.id)">
-                      <div class="col">
-                        <div class="card">
-                          <img src="assets/images/tv1.jpg" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title textoColor-product-title">{{ product.titulo }}</h5>
-                            <p class="card-text textoColor-product-price">$ {{ product.precio }}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                }
-
+          <a href="#" (click)="openPublication(product.id)" data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse.show">
+            <div class="col">
+              <div class="card">
+                <img src="assets/images/tv1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title textoColor-product-title">{{ product.titulo }}</h5>
+                  <p class="card-text textoColor-product-price">$ {{ product.precio }}</p>
                 </div>
-
-                <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex"
-                    [pageSizeOptions]="pageSizeOptions" [length]="totalItems" (page)="onPageChange($event)"
-                    aria-label="Select page" showFirstLastButtons
-                    class="d-flex mt-3 mb-3 pb-2 pt-2 justify-content-center align-items-center rounded">
-                </mat-paginator>
-
+              </div>
             </div>
-            </div>
+          </a>
+
+          }
 
         </div>
-    
+
+        <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+          [length]="totalItems" (page)="onPageChange($event)" aria-label="Select page" showFirstLastButtons
+          class="d-flex mt-3 mb-3 pb-2 pt-2 justify-content-center align-items-center rounded">
+        </mat-paginator>
+
+      </div>
+    </div>
+
+  </div>
+
 </section>
