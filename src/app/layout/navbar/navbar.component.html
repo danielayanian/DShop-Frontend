@@ -1,12 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-dark fondoColor-1">
+<nav class="navbar navbar-expand-lg navbar-dark fondoColor-1 sticky-top">
   <div class="container-fluid mt-1 mb-1">
 
     <!--<a class="navbar-brand" [routerLink]="['inicio/', 'dani']" routerLinkActive="active" 
     data-bs-toggle="collapse"
     data-bs-target=".navbar-collapse.show">-->
-    <a class="navbar-brand" routerLink="/products-list/inicio" routerLinkActive="active" 
-    data-bs-toggle="collapse"
-    data-bs-target=".navbar-collapse.show">
+    <a class="navbar-brand" routerLink="/products-list/inicio" routerLinkActive="active" data-bs-toggle="collapse"
+      data-bs-target=".navbar-collapse.show">
       <img src="assets/images/logoDShop.png" alt="" class="d-inline-block align-top headerLogo">
     </a>
 
@@ -14,15 +13,11 @@
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-      <!--<span style="font-size: large">&nbsp;Menú</span>-->
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-
-
       <div class="d-flex flex-row align-items-baseline flex-basis-auto">
-
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -32,29 +27,31 @@
               Categorías
             </a>
             <ul class="dropdown-menu categorias-fondo">
-              <li><a class="dropdown-item categorias-option" routerLink="/products-list/televisores" routerLinkActive="active"
-                  data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+              <li><a class="dropdown-item categorias-option" routerLink="/products-list/televisores"
+                  routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
                   Televisores
                 </a></li>
-              <li><a class="dropdown-item categorias-option" routerLink="/products-list/celulares" routerLinkActive="active"
-                  data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+              <li><a class="dropdown-item categorias-option" routerLink="/products-list/celulares"
+                  routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
                   Celulares
                 </a></li>
-              <li><a class="dropdown-item categorias-option" routerLink="/products-list/notebooks" routerLinkActive="active"
-                  data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+              <li><a class="dropdown-item categorias-option" routerLink="/products-list/notebooks"
+                  routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
                   Notebooks
                 </a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link color-blanco-verde" routerLink="/products-list/ofertas" routerLinkActive="active" data-bs-toggle="collapse"
-              data-bs-target=".navbar-collapse.show">Ofertas</a>
+            <a class="nav-link color-blanco-verde" routerLink="/products-list/ofertas" routerLinkActive="active"
+              data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Ofertas</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link color-blanco-verde" routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
-              data-bs-target=".navbar-collapse.show">Ayuda</a>
+            <a class="nav-link color-blanco-verde" routerLink="" routerLinkActive="active" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              Ayuda
+            </a>
           </li>
 
         </ul>
@@ -75,26 +72,26 @@
           @if(userLogueado() === 'false'){
 
           <li class="nav-item">
-            <a class="nav-link color-blanco-verde" routerLink="/crear-cuenta" routerLinkActive="active" data-bs-toggle="collapse"
-              data-bs-target=".navbar-collapse.show">
+            <a class="nav-link color-blanco-verde" routerLink="/crear-cuenta" routerLinkActive="active"
+              data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
               Creá tu cuenta</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link color-blanco-verde" routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
-              data-bs-target=".navbar-collapse.show">Ingresá&nbsp;</a>
+            <a class="nav-link color-blanco-verde" routerLink="/login" routerLinkActive="active"
+              data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Ingresá&nbsp;</a>
           </li>
 
           } @else {
 
-            @if(getRolOfUser() === 'ADMIN'){
+          @if(getRolOfUser() === 'ADMIN'){
 
-              <li class="nav-item">
-                <a class="nav-link texto-administrar" routerLink="/login" routerLinkActive="active" data-bs-toggle="collapse"
-                  data-bs-target=".navbar-collapse.show">Administrar&nbsp;</a>
-              </li>
+          <li class="nav-item">
+            <a href="" class="nav-link texto-administrar" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show">Administrar&nbsp;</a>
+          </li>
 
-            }
+          }
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle btn-categorias" role="button" data-bs-toggle="dropdown"
@@ -124,8 +121,7 @@
           <li class="d-flex">
             <a class="navbar-brand" [routerLink]="['products-list/inicio']" routerLinkActive="active"
               class="d-flex align-items-center" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
-              <img src="assets/images/carrito.png" alt="Carrito"
-                class="justify-content-center align-items-center">
+              <img src="assets/images/carrito.png" alt="Carrito" class="justify-content-center align-items-center">
             </a>
           </li>
 
@@ -137,3 +133,42 @@
   </div>
 
 </nav>
+
+
+<!-- Modal de Ayuda -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 color-6" id="exampleModalLabel">Ayuda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fondo-modal">
+
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+
+
+
+        lkgjf af aklf aklf akñlf hkalf kal fkal fkla hfkla flka flk kajfklaf klafa hafafjafjka fk
+        nfafafka flk fkla fnaf klanfkla nfklafn fk naf af af af kla fkla fklaflaf
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-buscar" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

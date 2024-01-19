@@ -138,3 +138,53 @@ a {
 .textoColor-product-title {
   color: #FF5733;
 }
+
+.btn-filtrar {
+  color: #16a085!important;
+  background-color: #FFC300!important;
+  /*border-color: #fff!important;*/
+}
+
+.btn-filtrar:hover {
+  background-color: #FF5733!important;
+  /*border-color: #fff!important;*/
+  color:#DAF7A6!important;
+  box-shadow: none;
+  outline: none;
+}
+
+.text-filter {
+  color: #FFC300!important;
+  background-color: #16a085!important;
+  font-size: 15px!important;
+}
+
+/* Estilos para el scroll del body */
+body::-webkit-scrollbar {
+  width: 17px;
+}
+body::-webkit-scrollbar-track {
+  background: #16a085;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #FFC300;
+  border-radius: 20px;
+  border: 3px solid #16a085;
+}
+
+/* Estilos para el scroll del modal */
+div::-webkit-scrollbar {
+  width: 17px;
+}
+div::-webkit-scrollbar-track {
+  background: #16a085;
+}
+div::-webkit-scrollbar-thumb {
+  background-color: #FFC300;
+  border-radius: 20px;
+  border: 3px solid #16a085;
+}
+
+.fondo-modal {
+  background-color: #DAF7A6;
+}
