@@ -18,10 +18,13 @@ export class PublicationComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.rutaActiva.snapshot.params['id'];
-    Swal.fire(this.id+'');
+    //Swal.fire(this.id+'');
 
   }
 
-
+  comprar(){
+    Swal.fire("Hola");
+    return false;
+  }
 
 }

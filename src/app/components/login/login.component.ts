@@ -74,7 +74,8 @@ export class LoginComponent implements OnInit {
             icon: "success",
             title: "Usted se ha logueado correctamente!!!",
             showConfirmButton: false,
-            timer: 3000
+            timer: 3000,
+            background: "#ffffff",
           });
 
           //Si el login esta marcado como recordar, guardo email y password en cookies
