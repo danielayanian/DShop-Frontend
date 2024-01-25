@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -28,6 +28,8 @@ export class CrearCuentaComponent {
   public passwordIncorrecto = false;
   public passwordRepetidoIncorrecto = false;
   public formularioRegistro: FormGroup<any>;
+
+  @ViewChild('myInput') myInput: any;
 
   constructor(private router: Router, private userService: UserService){
 
@@ -165,5 +167,11 @@ export class CrearCuentaComponent {
   }
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    //Set focus to the firstName field
+    this.myInput.nativeElement.focus();
+    window.scroll(0, 0);
+  }
 
 }

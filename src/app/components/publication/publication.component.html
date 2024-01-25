@@ -30,16 +30,16 @@
 
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="cantidad">Unidades a comprar</label>
-                            <input type="cantidad" formControlName="cantidad" id="cantidad" class="form-control"
-                                style="width: 290px;" value="1" />
+                            <input minlength="1" maxlength="4" type="cantidad" formControlName="cantidad" id="cantidad" class="form-control"
+                                style="width: 90px;" value="1" />
                         </div>
 
                     </div>
 
                     <div class="d-flex justify-content-center mx-4 mb-1 mb-lg-4">
                         <button type="submit" (click)="comprar()" class="btn btn-filtrar mb-0 me-3">Comprar</button>
-                        <button type="submit" (click)="comprar()" class="btn btn-filtrar mb-0">Agregar al
-                            Carrito</button>
+                        <button type="submit" (click)="comprar()" class="btn btn-filtrar mb-0">
+                            Agregar al carrito</button>
                     </div>
 
 

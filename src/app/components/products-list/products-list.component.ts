@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
@@ -6,6 +6,7 @@ import { customPaginator } from '../custom-paginator-configuration';
 import { HttpClient } from '@angular/common/http';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products-list',
@@ -28,11 +29,6 @@ export class ProductsListComponent implements OnInit {
 
   constructor(private http: HttpClient, private productService: ProductService,
     private router: Router, private rutaActiva: ActivatedRoute) { 
-
-      /*this.router.routeReuseStrategy.shouldReuseRoute = function() {
-        return false;
-
-      };*/
 
       rutaActiva.params.subscribe(params => { this.loadCards(); })
 

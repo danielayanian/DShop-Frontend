@@ -12,16 +12,19 @@
 
         <div class="mb-3">
           <div class="text-end">
-            <a href="" class="nav-link"  
-            data-bs-toggle="modal" data-bs-target="#modalFiltro"><span class="text-filter p-1 rounded">
+            
+            <div>
+            <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro"><span 
+              class="text-filter p-1 rounded">
               &nbsp;Filtrar por precio&nbsp;</span>
             </a>
+          </div>
           </div>
         </div>
 
         <!-- Modal para filtrar -->
         <div class="modal fade" id="modalFiltro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
+          <div class="modal-dialog" style="width: 350px;" onblur="cerroModal()">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5 color-6" id="exampleModalLabel">Filtrar por precio máximo</h1>
@@ -30,8 +33,9 @@
               <div class="modal-body fondo-modal">
                 <form>
                   <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Precio máximo:</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                    <label for="precioModal" class="col-form-label">Precio máximo:</label>
+                    <input minlength="1" maxlength="7" type="text" class="form-control" id="precioModal"
+                    style="width:150px;">
                   </div>
                 </form>
               </div>

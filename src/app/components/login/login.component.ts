@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,8 @@ import Swal from 'sweetalert2';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild('myInput') myInput: any;
 
   public formularioLogin: FormGroup<any>;
 
@@ -121,6 +123,12 @@ export class LoginComponent implements OnInit {
     this.formularioLogin.controls['email'].setValue(this.cookieService.get('email'));
     this.formularioLogin.controls['password'].setValue(this.cookieService.get('password'));
 
+  }
+
+  ngAfterViewInit(): void {
+    //Set focus to the firstName field
+    this.myInput.nativeElement.focus();
+    window.scroll(0, 0);
   }
 
 }
