@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_ENDPOINT } from "../config/app";
+import { Product } from "../models/product";
+import Swal from "sweetalert2";
 
 @Injectable({
     providedIn: 'root'
@@ -49,6 +51,13 @@ import { BASE_ENDPOINT } from "../config/app";
       .set('page', page)
       .set('size', size);
       return this.http.get<any>(BASE_ENDPOINT+'/listarNotebooks', {params: params});
+    }
+
+    public getProduct(id: number): Observable<any>{
+      //Swal.fire(id+'');
+      const params = new HttpParams()
+      .set('id', id);
+      return this.http.get<any>(BASE_ENDPOINT+'/getProduct', {params: params});
     }
 
 }

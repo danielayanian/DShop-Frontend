@@ -14,13 +14,12 @@
         <div class="col-md-4">
 
             <div class="card-body">
-                <h5 class="card-title textoColor-6 bold">Televisor Samsung 50'</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
+                <h5 class="card-title textoColor-6 bold">{{product.titulo}}</h5>
+                <p class="card-text">{{product.descripcion}}</p>
 
-                <p class="card-text">Precio: <span class="bold">$150.000</span></p>
+                <p class="card-text">Precio: <span class="bold">{{product.precio}}</span></p>
 
-                <p class="card-text">Unidades disponibles: {{ id }}</p>
+                <p class="card-text">Unidades disponibles: {{ id }}</p><!--- crear productDTO con Stock en vez de usar product--->
 
                 <form>
 

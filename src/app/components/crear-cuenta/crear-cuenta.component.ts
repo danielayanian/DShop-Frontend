@@ -129,7 +129,7 @@ export class CrearCuentaComponent {
         withCredentials: true
       };
 
-      this.userService.postRegist(BASE_ENDPOINT+"/api/user/registration", userDTO , options)
+      this.userService.postRegist(BASE_ENDPOINT+"/registration", userDTO , options)
       .subscribe((data: UserDTO) => {
 
           if(data.id > 0){
