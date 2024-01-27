@@ -27,18 +27,24 @@
               Categorías
             </a>
             <ul class="dropdown-menu categorias-fondo">
-              <li><a class="dropdown-item categorias-option" routerLink="/products-list/televisores"
-                  routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
-                  Televisores
-                </a></li>
-              <li><a class="dropdown-item categorias-option" routerLink="/products-list/celulares"
+
+              @for (category of categorias; track category.id) {
+
+                <li><a class="dropdown-item categorias-option" routerLink="/products-list/{{category.id}}"
+                    routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+                    {{category.nombre}}
+                  </a>
+                </li>
+
+              }
+              <!--<li><a class="dropdown-item categorias-option" routerLink="/products-list/celulares"
                   routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
                   Celulares
                 </a></li>
               <li><a class="dropdown-item categorias-option" routerLink="/products-list/notebooks"
                   routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
                   Notebooks
-                </a></li>
+                </a></li>-->
             </ul>
           </li>
 

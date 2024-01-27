@@ -5,7 +5,7 @@ import { BASE_ENDPOINT } from "../config/app";
 import { Product } from "../models/product";
 import Swal from "sweetalert2";
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class ProductService {
@@ -32,12 +32,23 @@ import Swal from "sweetalert2";
       return this.http.get<any>(BASE_ENDPOINT+'/listarOfertas', {params: params});
     }
 
-    public listarTelevisores(page: string, size: string): Observable<any>{
+
+
+
+
+
+    public listarProductosDeUnaCategoria(page: string, size: string, idCategoria: number): Observable<any>{
       const params = new HttpParams()
       .set('page', page)
-      .set('size', size);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarTelevisores', {params: params});
+      .set('size', size)
+      .set('idCategoria', idCategoria);
+      return this.http.get<any>(BASE_ENDPOINT+'/listarProductosDeUnaCategoria', {params: params});
     }
+
+
+
+
+
 
     public listarCelulares(page: string, size: string): Observable<any>{
       const params = new HttpParams()

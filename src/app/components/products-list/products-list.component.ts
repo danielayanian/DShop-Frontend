@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-products-list',
@@ -28,7 +29,8 @@ export class ProductsListComponent implements OnInit {
   pageSizeOptions: number[] = [5, 12, 24, 36];
 
   constructor(private http: HttpClient, private productService: ProductService,
-    private router: Router, private rutaActiva: ActivatedRoute) { 
+    private router: Router, private rutaActiva: ActivatedRoute,
+    private categoryService: CategoryService) { 
 
       rutaActiva.params.subscribe(params => { this.loadCards(); })
 
@@ -60,27 +62,11 @@ export class ProductsListComponent implements OnInit {
       
     }
 
-    if(this.rutaActiva.snapshot.params['tipo'] === 'televisores'){
+    //Para cuando seleccionan una categoria
+    if(!isNaN(this.rutaActiva.snapshot.params['tipo'])){
 
-      this.productService.listarTelevisores(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
-        this.products = data.content;
-        this.totalItems = data.totalElements;
-      });
-      
-    }
-
-    if(this.rutaActiva.snapshot.params['tipo'] === 'celulares'){
-
-      this.productService.listarCelulares(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
-        this.products = data.content;
-        this.totalItems = data.totalElements;
-      });
-      
-    }
-
-    if(this.rutaActiva.snapshot.params['tipo'] === 'notebooks'){
-
-      this.productService.listarNotebooks(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
+      this.productService.listarProductosDeUnaCategoria(this.pageIndex.toString(), this.pageSize.toString(),
+      this.rutaActiva.snapshot.params['tipo']).subscribe(data => {
         this.products = data.content;
         this.totalItems = data.totalElements;
       });

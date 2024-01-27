@@ -4,6 +4,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../services/user.service';
 import { BASE_ENDPOINT } from '../../config/app';
 import { HttpHeaders } from '@angular/common/http';
+import { Categoria } from '../../models/categoria';
+import { ProductService } from '../../services/product.service';
+import Swal from 'sweetalert2';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +18,10 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public cookieService: CookieService, private userService: UserService){
+  categorias: Categoria[] = [];
+
+  constructor(public cookieService: CookieService, private userService: UserService,
+    private productService: ProductService, private categoryService: CategoryService){
     
     if((this.userLogueado() != 'false') &&
     (this.userLogueado() != 'true')){
@@ -27,7 +34,7 @@ export class NavbarComponent implements OnInit {
     }
     
   }
-
+  
   public userLogueado() {
     return sessionStorage.getItem('userLogueado');
   }
@@ -41,6 +48,15 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.categoryService.getCategories()
+    .subscribe(
+      (data) => {
+
+          this.categorias = data;
+        
+      }
+    );
 
   }
 

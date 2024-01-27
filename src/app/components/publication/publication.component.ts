@@ -14,7 +14,7 @@ import { Product } from '../../models/product';
 export class PublicationComponent implements OnInit {
 
   id: number = 0;
-  product: Product = new Product(0, "","","",0);
+  product: Product = new Product(0, "", "", 0, 0, 0);
 
   constructor(private rutaActiva: ActivatedRoute, private productService: ProductService){}
 
