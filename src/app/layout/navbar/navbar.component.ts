@@ -4,10 +4,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../services/user.service';
 import { BASE_ENDPOINT } from '../../config/app';
 import { HttpHeaders } from '@angular/common/http';
-import { Categoria } from '../../models/categoria';
 import { ProductService } from '../../services/product.service';
 import Swal from 'sweetalert2';
 import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +18,7 @@ import { CategoryService } from '../../services/category.service';
 })
 export class NavbarComponent implements OnInit {
 
-  categorias: Categoria[] = [];
+  categorias: Category[] = [];
 
   constructor(public cookieService: CookieService, private userService: UserService,
     private productService: ProductService, private categoryService: CategoryService){

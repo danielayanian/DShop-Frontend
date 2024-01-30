@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -94,6 +94,8 @@ export class LoginComponent implements OnInit {
           .subscribe(
             (data: UserDTO) => {
 
+              sessionStorage.setItem('idUser', data.id+'');
+              
               sessionStorage.setItem('userNombre', data.nombre);
               sessionStorage.setItem('roles', data.roles);
 

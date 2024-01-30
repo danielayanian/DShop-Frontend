@@ -1,0 +1,23 @@
+.encabezado {
+    color: #DAF7A6!important;
+    background-color:#FF5733!important;
+    font-size: 15px!important;
+}
+
+.btn-filtrar:hover {
+    background-color: #FF5733!important;
+    /*border-color: #fff!important;*/
+    color:#DAF7A6!important;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-filtrar {
+    color: #16a085!important;
+    background-color: #FFC300!important;
+    /*border-color: #fff!important;*/
+}
+
+.card {
+    border: #DAF7A6!important;
+}

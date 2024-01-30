@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_ENDPOINT } from "../config/app";
@@ -16,6 +16,12 @@ import { BASE_ENDPOINT } from "../config/app";
   
     public getCategories(): Observable<any>{
         return this.http.get<any>(BASE_ENDPOINT+'/getCategories', {});
+    }
+
+    public getCategory(id: number): Observable<any>{
+      const params = new HttpParams()
+      .set('id', id);
+      return this.http.get<any>(BASE_ENDPOINT+'/getCategory', {params: params});
     }
 
 }

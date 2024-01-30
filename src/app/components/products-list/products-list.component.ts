@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
@@ -6,8 +6,8 @@ import { customPaginator } from '../custom-paginator-configuration';
 import { HttpClient } from '@angular/common/http';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-products-list',
@@ -27,6 +27,12 @@ export class ProductsListComponent implements OnInit {
   pageIndex = 0;
   totalItems = 0;
   pageSizeOptions: number[] = [5, 12, 24, 36];
+
+  encabezado: string = '';
+
+  idCategoria: string = '';
+
+  category: Category = new Category(0, '');
 
   constructor(private http: HttpClient, private productService: ProductService,
     private router: Router, private rutaActiva: ActivatedRoute,
@@ -49,6 +55,7 @@ export class ProductsListComponent implements OnInit {
       this.productService.listarDestacados(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
         this.products = data.content;
         this.totalItems = data.totalElements;
+        this.encabezado = 'Productos destacados';
       });
 
     }
@@ -58,6 +65,7 @@ export class ProductsListComponent implements OnInit {
       this.productService.listarOfertas(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
         this.products = data.content;
         this.totalItems = data.totalElements;
+        this.encabezado = 'Ofertas de la semana';
       });
       
     }
@@ -69,8 +77,18 @@ export class ProductsListComponent implements OnInit {
       this.rutaActiva.snapshot.params['tipo']).subscribe(data => {
         this.products = data.content;
         this.totalItems = data.totalElements;
+
       });
-      
+
+      this.idCategoria = this.rutaActiva.snapshot.params['tipo'];
+
+      this.categoryService.getCategory(Number(this.idCategoria)).subscribe(data => {
+        
+        this.category = data;
+        this.encabezado = 'Categoría: ' + this.category.nombre;
+
+      });
+
     }
 
   }

@@ -2,24 +2,30 @@
 
   <div class="container h-100 mt-3">
 
-    
-
     <div class="row d-flex justify-content-center align-items-center h-100">
 
-      
+      <div class="col-lg-12 col-xl-11 mt-5">
 
-      <div class="col-lg-12 col-xl-11 mt-3">
+        <div class="mb-5 row row-cols-2">
 
-        <div class="mb-3">
-          <div class="text-end">
-            
+          <div class="text-start">
             <div>
-            <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro"><span 
-              class="text-filter p-1 rounded">
-              &nbsp;Filtrar por precio&nbsp;</span>
-            </a>
+              <span 
+                class="encabezado p-1">
+                &nbsp;{{encabezado}}&nbsp;
+              </span>
+            </div>
           </div>
+
+          <div class="text-end">
+            <div>
+              <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro"><span 
+                class="p-1 rounded btn-filtrar">
+                &nbsp;Filtrar por precio&nbsp;</span>
+              </a>
+            </div>
           </div>
+
         </div>
 
         <!-- Modal para filtrar -->
@@ -48,8 +54,6 @@
         </div>
 
 
-
-
         <div class="row row-cols-1 row-cols-md-3 g-4">
 
           
@@ -74,7 +78,7 @@
 
         <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
           [length]="totalItems" (page)="onPageChange($event)" aria-label="Select page" showFirstLastButtons
-          class="d-flex mt-3 mb-3 pb-2 pt-2 justify-content-center align-items-center rounded">
+          class="d-flex mt-3 mb-5 pb-2 pt-2 justify-content-center align-items-center rounded">
         </mat-paginator>
 
       </div>
