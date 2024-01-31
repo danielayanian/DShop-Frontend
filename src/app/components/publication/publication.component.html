@@ -7,19 +7,19 @@
 
         <div class="col-md-8">
 
-            <img src="assets/images/tv1.jpg" class="img-fluid rounded w-100" alt="...">
+            <img src="assets/images/remeraNegraNarrowHombre.jpg" class="img-fluid rounded w-100" alt="...">
 
         </div>
 
         <div class="col-md-4">
 
             <div class="card-body">
-                <h5 class="card-title textoColor-6 bold">{{product.titulo}}</h5>
+                <h5 class="card-title textoColor-6 titulo-card mb-3">{{product.titulo}}</h5>
                 <p class="card-text">{{product.descripcion}}</p>
 
-                <p class="card-text">Precio: <span class="bold">{{product.precio}}</span></p>
+                <p class="card-text">Precio: <span class="precio-card">${{ precioAPrecioConPuntos(product.precio) }}</span></p>
 
-                <p class="card-text">Unidades disponibles: {{product.stock}}</p><!--- crear productDTO con Stock en vez de usar product--->
+                <p class="card-text">Unidades disponibles: {{product.stock}}</p>
 
                 <form>
 

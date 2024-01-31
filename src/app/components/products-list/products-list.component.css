@@ -1,12 +1,12 @@
 .encabezado {
-    color: #DAF7A6!important;
-    background-color:#FF5733!important;
-    font-size: 15px!important;
+    color: #FF5733!important;
+    /*background-color:#16a085!important;*/
+    font-size:23px!important;
+    font-weight: bold;
 }
 
 .btn-filtrar:hover {
     background-color: #FF5733!important;
-    /*border-color: #fff!important;*/
     color:#DAF7A6!important;
     box-shadow: none;
     outline: none;
@@ -15,9 +15,20 @@
 .btn-filtrar {
     color: #16a085!important;
     background-color: #FFC300!important;
-    /*border-color: #fff!important;*/
 }
 
-.card {
-    border: #DAF7A6!important;
+.precio-card {
+    font-weight: bold!important;
+    font-size: large!important;
+  }
+
+.titulo-card {
+    font-size: medium!important;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 2; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    color: #16a085;
 }
+

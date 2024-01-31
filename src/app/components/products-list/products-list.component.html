@@ -10,8 +10,8 @@
 
           <div class="text-start">
             <div>
-              <span 
-                class="encabezado p-1">
+              <span
+                class="encabezado p-1 pt-2 pb-2">
                 &nbsp;{{encabezado}}&nbsp;
               </span>
             </div>
@@ -20,7 +20,7 @@
           <div class="text-end">
             <div>
               <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro"><span 
-                class="p-1 rounded btn-filtrar">
+                class="p-1 rounded btn-filtrar pt-2 pb-2">
                 &nbsp;Filtrar por precio&nbsp;</span>
               </a>
             </div>
@@ -39,7 +39,7 @@
               <div class="modal-body fondo-modal">
                 <form>
                   <div class="mb-3">
-                    <label for="precioModal" class="col-form-label">Precio máximo:</label>
+                    <label for="precioModal" class="col-form-label textoColor-1">Precio máximo:</label>
                     <input minlength="1" maxlength="7" type="text" class="form-control" id="precioModal"
                     style="width:150px;">
                   </div>
@@ -63,10 +63,10 @@
             data-bs-target=".navbar-collapse.show">
             <div class="col">
               <div class="card">
-                <img src="assets/images/tv1.jpg" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title textoColor-product-title"><span class="bold">{{ product.titulo }}</span></h5>
-                  <p class="card-text textoColor-product-price" style="text-align: right;">Precio: <span class="bold">${{ product.precio }}</span></p>
+                <img src="assets/images/remeraNegraNarrowHombre.jpg" class="card-img-top">
+                <div class="card-body" style="height: 125px; background-color: #F5F5F0;">
+                  <h5><span class="card-title textoColor-product-title titulo-card mb-3">{{ product.titulo }}</span></h5>
+                  <p class="card-text textoColor-product-price" style="text-align: center;">Precio: <span class="precio-card">${{ precioAPrecioConPuntos(product.precio) }}</span></p>
                 </div>
               </div>
             </div>
@@ -76,10 +76,12 @@
 
         </div>
 
-        <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
-          [length]="totalItems" (page)="onPageChange($event)" aria-label="Select page" showFirstLastButtons
-          class="d-flex mt-3 mb-5 pb-2 pt-2 justify-content-center align-items-center rounded">
-        </mat-paginator>
+        <div style="margin-bottom: 70px;">
+          <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+            [length]="totalItems" (page)="onPageChange($event)" aria-label="Select page" showFirstLastButtons
+            class="d-flex mt-3 mb-5 pb-2 pt-2 justify-content-center align-items-center rounded">
+          </mat-paginator>
+        </div>
 
       </div>
     </div>

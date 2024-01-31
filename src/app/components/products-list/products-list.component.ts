@@ -108,4 +108,8 @@ export class ProductsListComponent implements OnInit {
 
   }
 
+  precioAPrecioConPuntos(precio: number){
+    return precio.toLocaleString('es');
+  }
+
 }

@@ -39,4 +39,8 @@ export class PublicationComponent implements OnInit {
     return false;
   }
 
+  precioAPrecioConPuntos(precio: number){
+    return precio.toLocaleString('es');
+  }
+
 }

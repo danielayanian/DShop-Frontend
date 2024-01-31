@@ -7,3 +7,17 @@
     border-radius: 0%;
     border: #DAF7A6;
 }
+
+.precio-card {
+    font-weight: bold!important;
+    font-size: large!important;
+  }
+
+.titulo-card {
+    font-size: large!important;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 2; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}

@@ -193,10 +193,6 @@ input:focus {
   box-shadow: 0 0 0px #DAF7A6!important;
 }
 
-.bold {
-  font-weight: bold;
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
