@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../services/user.service';
 import { BASE_ENDPOINT } from '../../config/app';
 import { HttpHeaders } from '@angular/common/http';
 import { ProductService } from '../../services/product.service';
-import Swal from 'sweetalert2';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
+import Swal from 'sweetalert2';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ RouterLink ],
+  imports: [ RouterLink, ReactiveFormsModule ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,7 +21,9 @@ export class NavbarComponent implements OnInit {
 
   categorias: Category[] = [];
 
-  constructor(public cookieService: CookieService, private userService: UserService,
+  public formularioBusqueda: FormGroup<any>;
+
+  constructor(private router: Router, public cookieService: CookieService, private userService: UserService,
     private productService: ProductService, private categoryService: CategoryService){
     
     if((this.userLogueado() != 'false') &&
@@ -32,6 +35,10 @@ export class NavbarComponent implements OnInit {
       sessionStorage.removeItem('roles');
     
     }
+
+    this.formularioBusqueda = new FormGroup({
+      busqueda: new FormControl("", Validators.required)
+    });
     
   }
   
@@ -44,6 +51,14 @@ export class NavbarComponent implements OnInit {
   }
 
   public buscar(){
+
+    let palabras = this.formularioBusqueda.get("busqueda")?.value;
+    
+    sessionStorage.setItem('palabras', palabras);
+
+    this.router.navigate(['products-list/busqueda']);//pasarle las primeras 4 palabras de la busqueda
+    //Y no sera Inicio la redireccion, sino una nueva llamada busqueda
+
 
   }
 

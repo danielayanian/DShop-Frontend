@@ -4,6 +4,7 @@ import { CrearCuentaComponent } from './components/crear-cuenta/crear-cuenta.com
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { PublicationComponent } from './components/publication/publication.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 export const routes: Routes = [
     {path:"", pathMatch: 'full', redirectTo: 'products-list/inicio'},
@@ -12,5 +13,6 @@ export const routes: Routes = [
     {path:"logout", redirectTo: 'products-list/inicio'},
     {path:"products-list/:tipo", component:ProductsListComponent},
     {path:"publication/:id", component:PublicationComponent},
-    {path:"purchases", component:PurchaseComponent}
+    {path:"purchases", component:PurchaseComponent},
+    {path:"perfil", component:PerfilComponent}
 ];

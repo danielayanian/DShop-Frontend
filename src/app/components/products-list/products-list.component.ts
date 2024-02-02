@@ -8,6 +8,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products-list',
@@ -68,6 +69,20 @@ export class ProductsListComponent implements OnInit {
         this.encabezado = 'Ofertas de la semana';
       });
       
+    }
+
+    if(this.rutaActiva.snapshot.params['tipo'] === 'busqueda'){
+
+      this.encabezado = 'Resultados búsqueda';
+      let palabras = sessionStorage.getItem('palabras')!;
+      Swal.fire(palabras);
+
+      //Cambiar esto por el endpoint de busqueda
+      this.productService.listarDestacados(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
+        this.products = data.content;
+        this.totalItems = data.totalElements;
+      });
+
     }
 
     //Para cuando seleccionan una categoria
