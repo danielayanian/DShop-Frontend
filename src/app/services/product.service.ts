@@ -32,11 +32,6 @@ import Swal from "sweetalert2";
       return this.http.get<any>(BASE_ENDPOINT+'/listarOfertas', {params: params});
     }
 
-
-
-
-
-
     public listarProductosDeUnaCategoria(page: string, size: string, idCategoria: number): Observable<any>{
       const params = new HttpParams()
       .set('page', page)
@@ -45,23 +40,13 @@ import Swal from "sweetalert2";
       return this.http.get<any>(BASE_ENDPOINT+'/listarProductosDeUnaCategoria', {params: params});
     }
 
-
-
-
-
-
-    public listarCelulares(page: string, size: string): Observable<any>{
+    public listarProductosDestPorPrecio(page: string, size: string, 
+      precio: number): Observable<any>{
       const params = new HttpParams()
       .set('page', page)
-      .set('size', size);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarCelulares', {params: params});
-    }
-
-    public listarNotebooks(page: string, size: string): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarNotebooks', {params: params});
+      .set('size', size)
+      .set('precio', precio);
+      return this.http.get<any>(BASE_ENDPOINT+'/filtrarDestPorPrecio', {params: params});
     }
 
     public getProduct(id: number): Observable<any>{

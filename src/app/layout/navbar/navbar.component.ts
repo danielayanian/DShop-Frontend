@@ -9,6 +9,7 @@ import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { switchAll } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -56,9 +57,45 @@ export class NavbarComponent implements OnInit {
     
     sessionStorage.setItem('palabras', palabras);
 
-    this.router.navigate(['products-list/busqueda']);//pasarle las primeras 4 palabras de la busqueda
-    //Y no sera Inicio la redireccion, sino una nueva llamada busqueda
+    if(this.router.url != '/products-list/busqueda'){
+      this.router.navigate(['products-list/busqueda']);
+    }else{
+      this.router.navigate(['products-list/busqueda-reload']);
+    }
 
+  }
+
+  public inicio(){
+
+    if(this.router.url != '/products-list/inicio'){
+      this.router.navigate(['products-list/inicio']);
+    }else{
+      this.router.navigate(['products-list/inicio-reload']);
+    }
+
+  }
+
+  public ofertas(){
+
+    if(this.router.url != '/products-list/ofertas'){
+      this.router.navigate(['products-list/ofertas']);
+    }else{
+      this.router.navigate(['products-list/ofertas-reload']);
+    }
+
+  }
+
+  public categ(idCateg: number){
+
+    sessionStorage.setItem("idCateg", idCateg+'');
+
+    if(this.router.url != '/products-list/' + idCateg){
+      //Swal.fire(idCateg+'');
+      this.router.navigate(['products-list/' + idCateg]);
+    }else{
+      //Swal.fire('reload');
+      this.router.navigate(['products-list/cat-reload']);
+    }
 
   }
 
