@@ -89,12 +89,10 @@ export class NavbarComponent implements OnInit {
 
     sessionStorage.setItem("idCateg", idCateg+'');
 
-    if(this.router.url != '/products-list/' + idCateg){
-      //Swal.fire(idCateg+'');
-      this.router.navigate(['products-list/' + idCateg]);
+    if(this.router.url != '/products-list/categ'){
+      this.router.navigate(['products-list/categ']);
     }else{
-      //Swal.fire('reload');
-      this.router.navigate(['products-list/cat-reload']);
+      this.router.navigate(['products-list/categ-reload']);
     }
 
   }

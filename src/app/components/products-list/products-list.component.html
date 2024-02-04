@@ -55,27 +55,47 @@
         </div>
 
 
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        
 
-          
-          @for (product of products; track product.id) {
+          @if (products.length === 0) {
 
-          <a href="#" (click)="openPublication(product.id)" data-bs-toggle="collapse"
-            data-bs-target=".navbar-collapse.show">
-            <div class="col">
-              <div class="card">
-                <img src="assets/images/remeraNegraNarrowHombre.jpg" class="card-img-top">
-                <div class="card-body" style="height: 125px; background-color: #F5F5F0;">
-                  <h5><span class="card-title textoColor-product-title titulo-card mb-3">{{ product.titulo }}</span></h5>
-                  <p class="card-text textoColor-product-price" style="text-align: center;">Precio: <span class="precio-card">${{ precioAPrecioConPuntos(product.precio) }}</span></p>
-                </div>
+          <div class="row row-cols-1 row-cols-md-1 g-0" style="margin-bottom: 200px;">
+
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div>
+                No hay productos
               </div>
             </div>
-          </a>
+
+          </div>
+
+          } @else {
+
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            @for (product of products; track product.id) {
+
+              <a href="#" (click)="openPublication(product.id)" data-bs-toggle="collapse"
+                data-bs-target=".navbar-collapse.show">
+                <div class="col">
+                  <div class="card">
+                    <img src="assets/images/remeraNegraNarrowHombre.jpg" class="card-img-top">
+                    <div class="card-body" style="height: 125px; background-color: #F5F5F0;">
+                      <h5><span class="card-title textoColor-product-title titulo-card mb-3">{{ product.titulo }}</span></h5>
+                      <p class="card-text textoColor-product-price" style="text-align: center;">Precio: <span class="precio-card">${{ precioAPrecioConPuntos(product.precio) }}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+    
+              }
+
+            </div>
 
           }
-
-        </div>
+          
+        @if (products.length != 0) {
 
         <div style="margin-bottom: 70px;">
           <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
@@ -83,6 +103,8 @@
             class="d-flex mt-3 mb-5 pb-2 pt-2 justify-content-center align-items-center rounded">
           </mat-paginator>
         </div>
+
+        }
 
       </div>
     </div>

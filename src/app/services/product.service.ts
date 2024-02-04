@@ -49,6 +49,25 @@ import Swal from "sweetalert2";
       return this.http.get<any>(BASE_ENDPOINT+'/filtrarDestPorPrecio', {params: params});
     }
 
+    public listarProductosOfertasPorPrecio(page: string, size: string, 
+      precio: number): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('precio', precio);
+      return this.http.get<any>(BASE_ENDPOINT+'/filtrarOfertasPorPrecio', {params: params});
+    }
+
+    public listarProductosDeUnaCategPorPrecio(page: string, size: string, idCategoria: number,
+      precio: number): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('precio', precio)
+      .set('idCategoria', idCategoria);
+      return this.http.get<any>(BASE_ENDPOINT+'/filtrarCategPorPrecio', {params: params});
+    }
+
     public getProduct(id: number): Observable<any>{
       //Swal.fire(id+'');
       const params = new HttpParams()

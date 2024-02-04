@@ -60,6 +60,8 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    sessionStorage.setItem('rutaActual', this.rutaActiva.snapshot.params['tipo']);
+
     this.loadCards();
 
   }
@@ -67,28 +69,9 @@ export class ProductsListComponent implements OnInit {
 
   loadCards() {
 
-    /*if(sessionStorage.getItem('filterState') === 'active'){
-
-      let precio = this.formularioListProducts.get("precioModal")?.value;
-
-      let tipo = sessionStorage.getItem('tipo')!;
-
-      this.productService.listarProductosPorPrecioMaximo(this.pageIndex.toString(), this.pageSize.toString(),
-      precio, tipo).subscribe(data => {
-        this.products = data.content;
-        this.totalItems = data.totalElements;
-      });
-
-      this.closebutton.nativeElement.click();
-
-    }else{*/
-
-
       if((this.rutaActiva.snapshot.params['tipo'] === 'inicio') ||
       (this.rutaActiva.snapshot.params['tipo'] === 'inicio-reload')){
-
-    
-
+  
         this.productService.listarDestacados(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
@@ -100,15 +83,12 @@ export class ProductsListComponent implements OnInit {
       if((this.rutaActiva.snapshot.params['tipo'] === 'ofertas')||
       (this.rutaActiva.snapshot.params['tipo'] === 'ofertas-reload')){
 
-    
-
         this.productService.listarOfertas(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
           this.encabezado = 'Ofertas de la semana';
         });
         
-
       }
 
       if((this.rutaActiva.snapshot.params['tipo'] === 'busqueda') ||
@@ -123,13 +103,11 @@ export class ProductsListComponent implements OnInit {
           this.encabezado = 'Resultados búsqueda';
         });
 
-        
       }
 
       //Para cuando seleccionan una categoria
-      //if((!isNaN(this.rutaActiva.snapshot.params['tipo']))||
-      if((!isNaN(this.rutaActiva.snapshot.params['tipo']))||
-      (this.rutaActiva.snapshot.params['tipo'] === 'cat-reload')){
+      if((this.rutaActiva.snapshot.params['tipo'] === 'categ') ||
+         (this.rutaActiva.snapshot.params['tipo'] === 'categ-reload')){
 
         let idCategNum: number = Number(sessionStorage.getItem("idCateg"));
 
@@ -154,26 +132,59 @@ export class ProductsListComponent implements OnInit {
 
     ////Seguir aca con los filtros, uno por cada tipo
 
-    if((this.rutaActiva.snapshot.params['tipo'] === 'DestacadosFilter') ||
-        (this.rutaActiva.snapshot.params['tipo'] === 'DestacadosFilter-reload')){
+    if((this.rutaActiva.snapshot.params['tipo'] === 'inicioFilter') ||
+        (this.rutaActiva.snapshot.params['tipo'] === 'inicioFilter-reload')){
 
         let precio = this.formularioListProducts.get("precioModal")?.value;
-        
-        Swal.fire(precio);
 
         this.productService.listarProductosDestPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
         Number(precio)).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
-          this.encabezado = 'Resultados búsqueda';
+          this.encabezado = 'Precio <= $' + this.precioAPrecioConPuntos(Number(precio));
         });
 
         this.closebutton.nativeElement.click();
         
       }
 
+      if((this.rutaActiva.snapshot.params['tipo'] === 'ofertasFilter') ||
+        (this.rutaActiva.snapshot.params['tipo'] === 'ofertasFilter-reload')){
 
+        let precio = this.formularioListProducts.get("precioModal")?.value;
+        
+        this.productService.listarProductosOfertasPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
+        Number(precio)).subscribe(data => {
+          this.products = data.content;
+          this.totalItems = data.totalElements;
+          this.encabezado = 'Precio <= $' + this.precioAPrecioConPuntos(Number(precio));
+        });
 
+        this.closebutton.nativeElement.click();
+        
+      }
+
+      if((this.rutaActiva.snapshot.params['tipo'] === 'categFilter') ||
+         (this.rutaActiva.snapshot.params['tipo'] === 'categFilter-reload')){
+
+        let idCategNum: number = Number(sessionStorage.getItem("idCateg"));
+
+        let precio = this.formularioListProducts.get("precioModal")?.value;
+
+        this.productService.listarProductosDeUnaCategPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
+        idCategNum, Number(precio)).subscribe(data => {
+
+          this.products = data.content;
+          this.totalItems = data.totalElements;
+          this.encabezado = 'Precio <= $' + this.precioAPrecioConPuntos(Number(precio));
+
+          //Swal.fire(this.products[2].titulo);
+
+        });
+
+        this.closebutton.nativeElement.click();
+
+    }
 
 
 
@@ -195,37 +206,51 @@ export class ProductsListComponent implements OnInit {
   }
 
   precioAPrecioConPuntos(precio: number){
-    return precio.toLocaleString('es');
+    return precio.toLocaleString('de-DE');
   }
 
   filtrar(){
 
-    if(this.router.url != '/products-list/DestacadosFilter'){
-      this.router.navigate(['products-list/DestacadosFilter']);
-    }else{
-      this.router.navigate(['products-list/DestacadosFilter-reload']);
+    if((this.router.url === '/products-list/inicioFilter') ||
+       (this.router.url === '/products-list/inicioFilter-reload') ||
+       (this.router.url === '/products-list/inicio') ||
+       (this.router.url === '/products-list/inicio-reload')){
+
+        if(this.router.url != '/products-list/inicioFilter'){
+          this.router.navigate(['products-list/inicioFilter']);
+        }else{
+          this.router.navigate(['products-list/inicioFilter-reload']);
+        }
+
     }
 
-    /*sessionStorage.setItem('filterState', 'active');
+    if((this.router.url === '/products-list/ofertasFilter') ||
+       (this.router.url === '/products-list/ofertasFilter-reload') ||
+       (this.router.url === '/products-list/ofertas') ||
+       (this.router.url === '/products-list/ofertas-reload')){
 
-    this.pageIndex = 0;
+        if(this.router.url != '/products-list/ofertasFilter'){
+          this.router.navigate(['products-list/ofertasFilter']);
+        }else{
+          this.router.navigate(['products-list/ofertasFilter-reload']);
+        }
 
-    this.loadCards();*/
+    }
 
-  
+    if((this.router.url === '/products-list/categFilter') ||
+       (this.router.url === '/products-list/categFilter-reload') ||
+       (this.router.url === '/products-list/categ') ||
+       (this.router.url === '/products-list/categ-reload')){
 
-    //this.products = this.productsBackUp.filter((product) => product.precio <= precio);
+        if(this.router.url != '/products-list/categFilter'){
+          this.router.navigate(['products-list/categFilter']);
+        }else{
+          this.router.navigate(['products-list/categFilter-reload']);
+        }
 
+    }
 
-
-
-    //Seguir por aca. Al buscar en ofertas por precio 100.000 me muestra solo 6 articulos en
-    //vez de 10
-
-
-    //this.pageIndex = 0; this.totalItems = this.products.length;
-
-    
+    //Falta el de la busqueda
 
   }
 

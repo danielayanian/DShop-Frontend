@@ -19,10 +19,10 @@ export class PurchaseComponent implements OnInit {
   constructor(private purchaseService: PurchaseService){}
 
   purchases: Purchase[] = [];
-  pageSize = 5;
+  pageSize = 6;
   pageIndex = 0;
   totalItems = 0;
-  pageSizeOptions: number[] = [5, 12, 24, 36];
+  pageSizeOptions: number[] = [6, 12, 24, 36];
 
   idUser: string = '';
 
