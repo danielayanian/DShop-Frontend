@@ -138,25 +138,28 @@ export class CrearCuentaComponent {
               icon: "success",
               title: "Registro exitoso!!!",
               showConfirmButton: false,
-              timer: 3000
+              timer: 3000,
+              background: "#ffffff"
             });
           }
 
           if(data.id === -33){
             Swal.fire({
               icon: "error",
-              title: "El email ingresado ya se encontraba registrado. Ingrese otro, o loguéese!!!",
-              showConfirmButton: true,
-              timer: 3000
+              title: "El email ingresado ya se encontraba registrado. Ingrese otro, o inicie sesión",
+              showConfirmButton: false,
+              timer: 3000,
+              background: "#ffffff"
             });
           }
 
           if(data.id === -32){
           Swal.fire({
               icon: "error",
-              title: "Un error ha ocurrido. Intente registrarse de nuevo!!!",
+              title: "Un error ha ocurrido. Intente registrarse de nuevo",
               showConfirmButton: false,
-              timer: 3000
+              timer: 3000,
+              background: "#ffffff"
             });
           }
 

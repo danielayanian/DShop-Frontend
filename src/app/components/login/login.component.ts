@@ -74,10 +74,10 @@ export class LoginComponent implements OnInit {
 
           Swal.fire({
             icon: "success",
-            title: "Usted se ha logueado correctamente!!!",
+            title: "Usted ha iniciado sesión correctamente!!!",
             showConfirmButton: false,
             timer: 3000,
-            background: "#ffffff",
+            background: "#ffffff"
           });
 
           //Si el login esta marcado como recordar, guardo email y password en cookies
@@ -108,9 +108,10 @@ export class LoginComponent implements OnInit {
 
           Swal.fire({
             icon: "error",
-            title: "Email o contraseña incorrectas, intente nuevamente!!!",
+            title: "Email o contraseña incorrectas, intente nuevamente",
             showConfirmButton: false,
-            timer: 3000
+            timer: 3000,
+            background: "#ffffff"
           });
 
         }

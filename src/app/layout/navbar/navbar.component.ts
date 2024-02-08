@@ -97,6 +97,16 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  public carrito(){
+
+    if(this.router.url != '/comprar/carrito'){
+      this.router.navigate(['comprar/carrito']);
+    }else{
+      this.router.navigate(['comprar/carrito-reload']);
+    }
+
+  }
+
   ngOnInit(): void {
 
     this.categoryService.getCategories()
