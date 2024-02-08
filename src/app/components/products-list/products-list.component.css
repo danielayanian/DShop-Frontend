@@ -1,7 +1,10 @@
 .encabezado {
     color: #FF5733!important;
-    /*background-color:#16a085!important;*/
-    /*font-size:17px!important;*/
+    font-weight: bold;
+}
+
+.precioMax {
+    color: #16a085!important;
     font-weight: bold;
 }
 

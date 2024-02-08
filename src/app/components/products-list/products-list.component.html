@@ -4,21 +4,26 @@
 
     <div class="row d-flex justify-content-center align-items-center h-100">
 
-      <div class="col-lg-12 col-xl-11 mt-5">
+      <div class="col-lg-12 col-xl-11 mt-4">
 
-        <div class="mb-5 row row-cols-2">
+        <div class="mb-4 row row-cols-2">
 
           <div class="text-start col-7 col-md-7">
             <div>
               <span
-                class="encabezado h5 p-1 pt-2 pb-2">
-                &nbsp;{{encabezado}}&nbsp;
+                class="encabezado h5 pt-0 pb-2">
+                &nbsp;{{ encabezado }}&nbsp;
+              </span>
+              <br>
+              <span
+                class="precioMax h7 pt-2 pb-2">
+                &nbsp;{{ precioMax }}&nbsp;
               </span>
             </div>
           </div>
 
-          <div class="text-end col-5 col-md-5">
-            <div>
+          <div class="text-end col-5 col-md-5 pt-2 pb-2 mb-1">
+            <div class="pt-1">
               <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro"><span 
                 class="p-1 rounded btn-filtrar pt-2 pb-2">
                 &nbsp;Filtrar por precio&nbsp;</span>
@@ -81,7 +86,7 @@
                 <div class="col">
                   <div class="card">
                     <img src="assets/images/remeraNegraNarrowHombre.jpg" class="card-img-top">
-                    <div class="card-body" style="height: 125px; background-color: #F5F5F0;">
+                    <div class="card-body" style="height: 125px; background-color: #e9e9dd;">
                       <h5><span class="card-title textoColor-product-title titulo-card mb-3">{{ product.titulo }}</span></h5>
                       <p class="card-text textoColor-product-price" style="text-align: center;">Precio: <span class="precio-card">${{ precioAPrecioConPuntos(product.precio) }}</span></p>
                     </div>

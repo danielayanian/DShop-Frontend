@@ -8,10 +8,8 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
-import Swal from 'sweetalert2';
-import { Observable, map, of } from 'rxjs';
-import swal from 'sweetalert';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products-list',
@@ -27,7 +25,6 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 export class ProductsListComponent implements OnInit {
 
   products: Product[] = [];
-  //productsBackUp: Product[] = [];
   pageSize = 6;
   pageIndex = 0;
   totalItems = 0;
@@ -35,7 +32,7 @@ export class ProductsListComponent implements OnInit {
 
   encabezado: string = '';
 
-  //idCategoria: string = '';
+  precioMax: string = '';
 
   category: Category = new Category(0, '');
 
@@ -50,7 +47,7 @@ export class ProductsListComponent implements OnInit {
       rutaActiva.params.subscribe(params => { 
         this.pageIndex = 0; this.totalItems = 0;
         this.loadCards(); 
-      });//this.pageIndex = 0; this.totalItems = 0;
+      });
 
       this.formularioListProducts = new FormGroup({
         precioModal: new FormControl("", Validators.required)
@@ -69,9 +66,13 @@ export class ProductsListComponent implements OnInit {
 
   loadCards() {
 
+    this.precioMax = '';
+
+    window.scroll(0, 0);
+
       if((this.rutaActiva.snapshot.params['tipo'] === 'inicio') ||
       (this.rutaActiva.snapshot.params['tipo'] === 'inicio-reload')){
-  
+
         this.productService.listarDestacados(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
@@ -86,20 +87,22 @@ export class ProductsListComponent implements OnInit {
         this.productService.listarOfertas(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
+
           this.encabezado = 'Ofertas de la semana';
         });
         
       }
 
-      if((this.rutaActiva.snapshot.params['tipo'] === 'busqueda') ||
-        (this.rutaActiva.snapshot.params['tipo'] === 'busqueda-reload')){
+      if((this.rutaActiva.snapshot.params['tipo'] === 'search') ||
+        (this.rutaActiva.snapshot.params['tipo'] === 'search-reload')){
 
-        let palabras = sessionStorage.getItem('palabras')!;
+        let palabras: string = sessionStorage.getItem('palabras')!;
 
-        //Cambiar esto por el endpoint de busqueda, y pasarle las palabras
-        this.productService.listarDestacados(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
+        this.productService.listarBusqueda(this.pageIndex.toString(), this.pageSize.toString(),
+        palabras).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
+
           this.encabezado = 'Resultados búsqueda';
         });
 
@@ -141,7 +144,7 @@ export class ProductsListComponent implements OnInit {
         Number(precio)).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
-          this.encabezado = 'Precio <= $' + this.precioAPrecioConPuntos(Number(precio));
+          this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
         });
 
         this.closebutton.nativeElement.click();
@@ -157,7 +160,7 @@ export class ProductsListComponent implements OnInit {
         Number(precio)).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
-          this.encabezado = 'Precio <= $' + this.precioAPrecioConPuntos(Number(precio));
+          this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
         });
 
         this.closebutton.nativeElement.click();
@@ -176,7 +179,7 @@ export class ProductsListComponent implements OnInit {
 
           this.products = data.content;
           this.totalItems = data.totalElements;
-          this.encabezado = 'Precio <= $' + this.precioAPrecioConPuntos(Number(precio));
+          this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
 
           //Swal.fire(this.products[2].titulo);
 
@@ -186,6 +189,23 @@ export class ProductsListComponent implements OnInit {
 
     }
 
+    if((this.rutaActiva.snapshot.params['tipo'] === 'searchFilter') ||
+        (this.rutaActiva.snapshot.params['tipo'] === 'searchFilter-reload')){
+
+        let palabras = sessionStorage.getItem('palabras')!;
+        let precio = this.formularioListProducts.get("precioModal")?.value;
+
+        //Cambiar esto por el endpoint de busqueda, y pasarle las palabras
+        this.productService.listarBusquedaPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
+        palabras, Number(precio)).subscribe(data => {
+          this.products = data.content;
+          this.totalItems = data.totalElements;
+          this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
+        });
+
+        this.closebutton.nativeElement.click();
+
+      }
 
 
 
@@ -251,6 +271,18 @@ export class ProductsListComponent implements OnInit {
     }
 
     //Falta el de la busqueda
+    if((this.router.url === '/products-list/searchFilter') ||
+       (this.router.url === '/products-list/searchFilter-reload') ||
+       (this.router.url === '/products-list/search') ||
+       (this.router.url === '/products-list/search-reload')){
+
+        if(this.router.url != '/products-list/searchFilter'){
+          this.router.navigate(['products-list/searchFilter']);
+        }else{
+          this.router.navigate(['products-list/searchFilter-reload']);
+        }
+
+    }
 
   }
 

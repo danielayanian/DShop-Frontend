@@ -40,6 +40,14 @@ import Swal from "sweetalert2";
       return this.http.get<any>(BASE_ENDPOINT+'/listarProductosDeUnaCategoria', {params: params});
     }
 
+    public listarBusqueda(page: string, size: string, palabras: string): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('palabras', palabras);
+      return this.http.get<any>(BASE_ENDPOINT+'/listarBusqueda', {params: params});
+    }
+
     public listarProductosDestPorPrecio(page: string, size: string, 
       precio: number): Observable<any>{
       const params = new HttpParams()
@@ -66,6 +74,16 @@ import Swal from "sweetalert2";
       .set('precio', precio)
       .set('idCategoria', idCategoria);
       return this.http.get<any>(BASE_ENDPOINT+'/filtrarCategPorPrecio', {params: params});
+    }
+
+    public listarBusquedaPorPrecio(page: string, size: string, palabras: string, 
+      precio: number): Observable<any>{
+      const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('palabras', palabras)
+      .set('precio', precio);
+      return this.http.get<any>(BASE_ENDPOINT+'/filtrarBusquedaPorPrecio', {params: params});
     }
 
     public getProduct(id: number): Observable<any>{

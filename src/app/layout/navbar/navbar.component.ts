@@ -57,10 +57,10 @@ export class NavbarComponent implements OnInit {
     
     sessionStorage.setItem('palabras', palabras);
 
-    if(this.router.url != '/products-list/busqueda'){
-      this.router.navigate(['products-list/busqueda']);
+    if(this.router.url != '/products-list/search'){
+      this.router.navigate(['products-list/search']);
     }else{
-      this.router.navigate(['products-list/busqueda-reload']);
+      this.router.navigate(['products-list/search-reload']);
     }
 
   }
