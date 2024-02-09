@@ -6,6 +6,17 @@
       <img src="assets/images/logoDShop.png" alt="" class="d-inline-block align-top headerLogo">
     </a>
 
+    <div class="d-flex flex-row flex-grow-1 d-lg-none">
+      <form [formGroup]="formularioBusqueda"
+      class="d-flex flex-row align-items-baseline justify-content-center flex-grow-1">
+        <input class="form-control me-2 border-search" type="text"
+         placeholder="Buscar productos..."
+         formControlName="busqueda" id="busqueda">
+        <button class="btn btn-buscar" type="submit" (click)="buscar()" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show">Buscar</button>
+      </form>
+    </div>
+
     <button class="navbar-toggler menu-hamburger" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
       aria-label="Toggle navigation">
@@ -52,7 +63,7 @@
         </ul>
       </div>
 
-      <div class="d-flex flex-row flex-grow-1">
+      <div class="d-flex flex-row flex-grow-1 d-none d-lg-block">
         <form [formGroup]="formularioBusqueda"
         class="d-flex flex-row align-items-baseline justify-content-center flex-grow-1">
           <input class="form-control me-2 border-search" type="text"
