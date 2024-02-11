@@ -19,39 +19,35 @@
           
                     <div class="table-responsive">
                         <table class="table table-bordered">
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            <th class="fila-titulo">afflkhafalf kllkalkflka</th>
-                            
+                          <thead>
+                            <th class="fila-titulo">Fecha de compra</th>
+                            <th class="fila-titulo">Producto</th>
+                            <th class="fila-titulo">Cantidad</th>
+                            <th class="fila-titulo">Precio por unidad</th>
+                            <th class="fila-titulo">Total compra</th>
+                            <th class="fila-titulo">Ver</th>
+                          </thead>
                     
-                        
-                            @for(purchase of purchases; track purchase.id){
-                            
+                          <tbody>
 
+                            @for(purchase of purchases; track purchase.id){
+                          
                                 <tr class="fila-info">
-                                    <td class="fila-info">{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    <td>{{purchase.precioUnidad}}</td>
-                                    
+                                    <td>{{purchase.fecha}}</td>
+                                    <td>{{purchase.product.titulo}}</td>
+                                    <td>{{purchase.cantidad}}</td>
+                                    <td>${{precioAPrecioConPuntos(purchase.precioUnidad)}}</td>
+                                    <td>${{precioAPrecioConPuntos(purchase.cantidad*purchase.precioUnidad)}}</td>
+                                    <td>
+                                      <a href="#" (click)="openPublication(purchase.product.id)" class="color-6">
+                                        Ver
+                                      </a>
+                                    </td>
                                 </tr>
 
-                                
-                            
                             }
+
+                          </tbody>
 
                         </table>
                     </div>

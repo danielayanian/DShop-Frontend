@@ -20,7 +20,7 @@ export class PublicationComponent implements OnInit {
 
   cantidad: number = 0;
 
-  product: Product = new Product(0, "", "", 0, 0, 0);
+  product: Product = new Product(0, "", "", "", 0, 0, 0);
 
   public formularioPublicacion: FormGroup<any>;
 

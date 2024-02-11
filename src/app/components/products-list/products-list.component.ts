@@ -4,7 +4,6 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { customPaginator } from '../custom-paginator-configuration';
 import { HttpClient } from '@angular/common/http';
-import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
@@ -16,7 +15,7 @@ import Swal from 'sweetalert2';
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.css',
   standalone: true,
-  imports: [ MatPaginatorModule, ProductCardComponent, ReactiveFormsModule ],
+  imports: [ MatPaginatorModule, ReactiveFormsModule ],
   //Esto es para personalizar el paginator
   providers: [
     { provide: MatPaginatorIntl, useValue: customPaginator() }
@@ -230,6 +229,19 @@ export class ProductsListComponent implements OnInit {
   }
 
   filtrar(){
+
+    let precio = this.formularioListProducts.get("precioModal")?.value;
+
+    if(precio.match("^[0-9]+$") === null){
+      Swal.fire({
+        icon: "error",
+        title: "Debe ingresar un número",
+        showConfirmButton: false,
+        timer: 3000,
+        background: "#ffffff"
+      });
+      return;
+    }
 
     if((this.router.url === '/products-list/inicioFilter') ||
        (this.router.url === '/products-list/inicioFilter-reload') ||

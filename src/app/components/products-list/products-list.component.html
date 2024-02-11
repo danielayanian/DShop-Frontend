@@ -24,7 +24,7 @@
 
           <div class="text-end col-5 col-md-5 pt-2 pb-2 mb-1">
             <div class="pt-1">
-              <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro"><span 
+              <a href="" data-bs-toggle="modal" data-bs-target="#modalFiltro" ><span 
                 class="p-1 rounded btn-filtrar pt-2 pb-2">
                 &nbsp;Filtrar por precio&nbsp;</span>
               </a>
@@ -44,7 +44,9 @@
               <div class="modal-body fondo-modal">
                 <form [formGroup]="formularioListProducts">
                   <div class="mb-3">
-                    <label for="precioModal" class="col-form-label textoColor-1">Precio máximo:</label>
+                    <label for="precioModal" class="col-form-label textoColor-1"
+                      style="font-weight: bold;">Precio máximo:
+                    </label>
                     <input minlength="1" maxlength="7" type="text"
                     formControlName="precioModal" class="form-control" id="precioModal"
                     style="width:150px;">
@@ -52,8 +54,8 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button #closebutton type="button" class="btn btn-filtrar" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-filtrar" id="closebutton" (click)="filtrar()">Filtrar</button>
+                <button #closebutton type="button" class="btn btn-filtrar" data-bs-dismiss="modal" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Cerrar</button>
+                <button type="button" class="btn btn-filtrar" id="closebutton"  data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="filtrar()">Filtrar</button>
               </div>
             </div>
           </div>
@@ -85,7 +87,7 @@
                 data-bs-target=".navbar-collapse.show">
                 <div class="col">
                   <div class="card">
-                    <img src="assets/images/remeraNegraNarrowHombre.jpg" class="card-img-top">
+                    <img src="assets/images/products/{{product.fotoPrecargada}}" class="card-img-top">
                     <div class="card-body" style="height: 125px; background-color: #e9e9dd;">
                       <h5><span class="card-title textoColor-product-title titulo-card mb-3">{{ product.titulo }}</span></h5>
                       <p class="card-text textoColor-product-price" style="text-align: center;">Precio: <span class="precio-card">${{ precioAPrecioConPuntos(product.precio) }}</span></p>

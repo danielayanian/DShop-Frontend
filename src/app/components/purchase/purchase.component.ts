@@ -3,6 +3,7 @@ import { PurchaseService } from '../../services/purchase.service';
 import { Purchase } from '../../models/purchase';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { customPaginator } from '../custom-paginator-configuration';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-purchase',
@@ -16,7 +17,7 @@ import { customPaginator } from '../custom-paginator-configuration';
 })
 export class PurchaseComponent implements OnInit {
   
-  constructor(private purchaseService: PurchaseService){}
+  constructor(private purchaseService: PurchaseService, private router: Router){}
 
   purchases: Purchase[] = [];
   pageSize = 6;
@@ -46,12 +47,22 @@ export class PurchaseComponent implements OnInit {
 
   }
 
-
   onPageChange(event: any) {
 
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadPurchases();
+
+  }
+
+  precioAPrecioConPuntos(precio: number){
+    return precio.toLocaleString('de-DE');
+  }
+
+  openPublication(id: number){
+
+    this.router.navigate(['publication/' + id]);
+    return false;
 
   }
 

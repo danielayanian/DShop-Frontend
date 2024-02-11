@@ -3,7 +3,7 @@
 
     <a class="navbar-brand"  (click)="inicio()" href="" routerLinkActive="active" data-bs-toggle="collapse"
       data-bs-target=".navbar-collapse.show">
-      <img src="assets/images/logoDShop.png" alt="" class="d-inline-block align-top headerLogo">
+      <img src="assets/images/logo.jpg" style="width: 100px; height: 37px; border-radius: 5px;" alt="" class="d-inline-block align-top headerLogo pb-0 pt-0">
     </a>
 
     <div class="d-flex flex-row flex-grow-1 d-lg-none">
@@ -27,7 +27,7 @@
 
       <div class="d-flex flex-row align-items-baseline flex-basis-auto">
 
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-0 mb-lg-0">
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle btn-categorias" href="#" role="button" data-bs-toggle="dropdown"
@@ -54,7 +54,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link color-blanco-verde" href="" data-bs-toggle="modal"
+            <a class="nav-link color-blanco-verde me-2" href="" data-bs-toggle="modal"
               data-bs-target="#exampleModal">
               Ayuda
             </a>
@@ -63,7 +63,7 @@
         </ul>
       </div>
 
-      <div class="d-flex flex-row flex-grow-1 d-none d-lg-block">
+      <div class="d-flex flex-row flex-grow-1 d-none d-lg-block me-2">
         <form [formGroup]="formularioBusqueda"
         class="d-flex flex-row align-items-baseline justify-content-center flex-grow-1">
           <input class="form-control me-2 border-search" type="text"
@@ -86,7 +86,7 @@
               Creá tu cuenta</a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item me-1">
             <a class="nav-link color-blanco-verde" routerLink="/login" onclick="window.scroll(0, 0);" routerLinkActive="active"
               data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Ingresá&nbsp;</a>
           </li>
@@ -102,7 +102,7 @@
 
           }
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown me-2">
             <a class="nav-link dropdown-toggle btn-categorias" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               {{userNombre()}}
@@ -131,7 +131,7 @@
             <a class="navbar-brand" routerLinkActive="active"
               (click)="carrito()" href=""
               class="d-flex align-items-center" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
-              <img src="assets/images/carrito.png" alt="Carrito" class="justify-content-center align-items-center">
+              <img src="assets/images/carrito.png" alt="Carrito" class="justify-content-center align-items-center mt-2 mb-2">
             </a>
           </li>
 
@@ -155,39 +155,40 @@
       </div>
       <div class="modal-body fondo-modal">
 
-        <p class="bold textoColor-1">Preguntas frecuentes:</p>
+        <p class="textoColor-1" style="font-weight: bold;">Preguntas frecuentes:</p>
 
         <ul>
           <li>
-            <p class="bold">sgklslskgklgklslkghgklhsklhlk?</p>
+            <p style="font-weight: bold;">Cuál es la demora en la entrega de una compra?</p>
+            <p>Los productos son entregados en la dirección que usted tiene
+              registrada en su perfil dentro de las 48 hs posteriores a realizada
+              la compra. Cualquier demora extra por casos de fuerza mayor le será
+              informada por teléfono.
+            </p>
+          </li>
+          <li>
+            <p style="font-weight: bold;">sgklslskgklgklslkghgklhsklhlk?</p>
             <p>sgklslskgklgklslkghgklhsklhlk kshflkflka hl lkalahlk lk lka lk ahl
               jfklaf lka fkla fkla lkalkaj fklafklaklf jaklfjalkfalk kjlj ajklfakl
               lksjskllk sflksfljskfl sfjs.
             </p>
           </li>
           <li>
-            <p class="bold">sgklslskgklgklslkghgklhsklhlk?</p>
+            <p style="font-weight: bold;">sgklslskgklgklslkghgklhsklhlk?</p>
             <p>sgklslskgklgklslkghgklhsklhlk kshflkflka hl lkalahlk lk lka lk ahl
               jfklaf lka fkla fkla lkalkaj fklafklaklf jaklfjalkfalk kjlj ajklfakl
               lksjskllk sflksfljskfl sfjs.
             </p>
           </li>
           <li>
-            <p class="bold">sgklslskgklgklslkghgklhsklhlk?</p>
+            <p style="font-weight: bold;">sgklslskgklgklslkghgklhsklhlk?</p>
             <p>sgklslskgklgklslkghgklhsklhlk kshflkflka hl lkalahlk lk lka lk ahl
               jfklaf lka fkla fkla lkalkaj fklafklaklf jaklfjalkfalk kjlj ajklfakl
               lksjskllk sflksfljskfl sfjs.
             </p>
           </li>
           <li>
-            <p class="bold">sgklslskgklgklslkghgklhsklhlk?</p>
-            <p>sgklslskgklgklslkghgklhsklhlk kshflkflka hl lkalahlk lk lka lk ahl
-              jfklaf lka fkla fkla lkalkaj fklafklaklf jaklfjalkfalk kjlj ajklfakl
-              lksjskllk sflksfljskfl sfjs.
-            </p>
-          </li>
-          <li>
-            <p class="bold">sgklslskgklgklslkghgklhsklhlk?</p>
+            <p style="font-weight: bold;">sgklslskgklgklslkghgklhsklhlk?</p>
             <p>sgklslskgklgklslkghgklhsklhlk kshflkflka hl lkalahlk lk lka lk ahl
               jfklaf lka fkla fkla lkalkaj fklafklaklf jaklfjalkfalk kjlj ajklfakl
               lksjskllk sflksfljskfl sfjs.
@@ -197,7 +198,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-buscar" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-buscar" data-bs-dismiss="modal" 
+        data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Cerrar</button>
       </div>
     </div>
   </div>

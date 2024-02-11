@@ -10,10 +10,15 @@
     padding: 12px!important;
     background-color: #16a085!important;
     color: #DAF7A6!important;
+    text-align: center!important;
+    white-space: nowrap!important;
+    border-width: 2px!important;
 }
 
 .fila-info {
     padding: 12px!important;
     background-color: white!important;
     color: #16a085!important;
+    text-align: center!important;
+    border-width: 2px!important;
 }
