@@ -1,4 +1,5 @@
 import { ItemCarrito } from "./itemCarrito";
+import { Product } from "./product";
 
 /*export abstract class Carrito {
 
@@ -18,15 +19,15 @@ export class Carrito {
 
     static items: ItemCarrito[] = [];
 
-    static agregarItem(id: number, cantidad: number){
+    static agregarItem(product: Product, cantidad: number){
 
-        this.items.push(new ItemCarrito(id, cantidad));
+        this.items.push(new ItemCarrito(product, cantidad));
 
     }
 
     static eliminarItem(posicion: number){
 
-        this.items.splice(posicion); //Sino usar filter
+        this.items.splice(posicion);
 
     }
 

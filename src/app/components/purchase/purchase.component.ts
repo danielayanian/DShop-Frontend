@@ -25,6 +25,8 @@ export class PurchaseComponent implements OnInit {
   totalItems = 0;
   pageSizeOptions: number[] = [6, 12, 24, 36];
 
+  hayCompras : boolean = false;
+
   idUser: string = '';
 
   loadPurchases(){
@@ -34,6 +36,12 @@ export class PurchaseComponent implements OnInit {
 
       this.purchases = data.content;
       this.totalItems = data.totalElements;
+
+      if(this.totalItems === 0){
+        this.hayCompras = false;
+      }else{
+        this.hayCompras = true;
+      }
 
     });
 

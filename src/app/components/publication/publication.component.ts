@@ -76,7 +76,7 @@ export class PublicationComponent implements OnInit {
     this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
 
     //Agregar producto al carrito y su cantidad
-    Carrito.agregarItem(this.id, this.cantidad);
+    Carrito.agregarItem(this.product, this.cantidad);
 
     Swal.fire({
       icon: "success",

@@ -1,11 +1,13 @@
+import { Product } from "./product";
+
 export class ItemCarrito {
 
-    public id: number = 0;
+    public product: Product = new Product(0, '', '', '', 0, 0, 0);
     public cantidad: number = 0;
 
-    constructor(id: number, cantidad: number){
+    constructor(product: Product, cantidad: number){
 
-        this.id = id;
+        this.product = product;
         this.cantidad = cantidad;
 
     }

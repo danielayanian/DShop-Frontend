@@ -1,3 +1,128 @@
-<p>{{ id }}</p>
+<section class="vh-70" style="background-color: #DAF7A6;">
 
-<p>{{ cantidad }}</p>
+    <div class="container h-100 mt-3">
+  
+      <div class="row d-flex justify-content-center align-items-center h-100">
+  
+        <div class="col-lg-12 col-xl-11 mt-2">
+  
+  
+  
+          <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5 textoColor-6">
+            {{ titulo }}
+          </p>
+  
+        <div class="row row-cols-1 row-cols-md-1 g-4 ms-0 me-0">
+
+            @if(titulo === 'Contenido del carrito'){
+
+                @if(itemsDelCarrito.length === 0){
+  
+                    <div class="row row-cols-1 row-cols-md-1 g-0" style="margin-bottom: 200px;">
+          
+                      <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                          <use xlink:href="#exclamation-triangle-fill" />
+                        </svg>
+                        <div>
+                          El carrito está vacío
+                        </div>
+                      </div>
+          
+                    </div>
+          
+                    } @else {
+          
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <th class="fila-titulo">Producto</th>
+                          <th class="fila-titulo">Cantidad</th>
+                          <th class="fila-titulo">Precio por unidad</th>
+                          <th class="fila-titulo">Total producto</th>
+                          <th class="fila-titulo">Eliminar</th>
+                        </thead>
+          
+                        <tbody>
+          
+                          @for(item of itemsDelCarrito; track item.product.id){ 
+          
+                          <tr class="fila-info align-middle">
+                            <td>{{item.product.titulo}}</td>
+                            <td>{{item.cantidad}}</td>
+                            <td>${{precioAPrecioConPuntos(item.product.precio)}}</td>
+                            <td>${{precioAPrecioConPuntos(item.product.precio*item.cantidad)}}</td>
+                            <td>
+                              <button type="submit" (click)="eliminarItem(itemsDelCarrito.indexOf(item))" class="btn btn-pagar ms-2">
+                                Eliminar
+                              </button>
+                            </td>
+                          </tr>
+          
+                          }
+          
+                        </tbody>
+          
+                      </table>
+
+                    </div>
+
+                    <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5" style="color: black;">
+                      Total a pagar: <span class="textoColor-1">${{ precioAPrecioConPuntos(totalAPagar) }}</span>
+                      <button type="submit" (click)="pagar()" class="btn btn-pagar ms-2" 
+                      >Pagar</button>
+                    </p>
+
+                    }
+
+            }
+
+            @if(titulo === 'Comprar producto'){
+                
+
+
+
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <th class="fila-titulo">Producto</th>
+                    <th class="fila-titulo">Cantidad</th>
+                    <th class="fila-titulo">Precio por unidad</th>
+                    <th class="fila-titulo">Total</th>
+                  </thead>
+    
+                  <tbody>
+    
+                    <tr class="fila-info">
+                      <td>{{product.titulo}}</td>
+                      <td>{{cantidad}}</td>
+                      <td>${{precioAPrecioConPuntos(product.precio)}}</td>
+                      <td>${{precioAPrecioConPuntos(product.precio*cantidad)}}</td>
+                    </tr>
+    
+                  </tbody>
+    
+                </table>
+
+              </div> 
+
+
+              <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5" style="color: black;">
+                Total a pagar: <span class="textoColor-1">${{ precioAPrecioConPuntos(product.precio*cantidad) }}</span>
+                <button type="submit" (click)="pagar()" class="btn btn-pagar ms-2" 
+                >Pagar</button>
+              </p>
+
+
+            }
+            
+  
+          </div>
+  
+      </div>
+  
+      </div>
+  </div>
+ 
+  </section>

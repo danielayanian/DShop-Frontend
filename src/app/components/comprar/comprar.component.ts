@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Carrito } from '../../models/carrito';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/product';
+import { ItemCarrito } from '../../models/itemCarrito';
 
 @Component({
   selector: 'app-comprar',
@@ -12,19 +15,34 @@ import { Carrito } from '../../models/carrito';
 })
 export class ComprarComponent implements OnInit {
 
-  id: number = 0;
+  idProduct: number = 0;
   cantidad: number = 0;
+  idUser: number = 0;
+  product: Product = new Product(0, '', '', '', 0, 0, 0);
+  itemsDelCarrito: ItemCarrito[] = [];
+  titulo: string = '';
+  totalAPagar: number = 0;
+  posItem : number = -1;
 
-  constructor(private rutaActiva: ActivatedRoute){}
+  constructor(private rutaActiva: ActivatedRoute, private productService: ProductService){}
 
   ngOnInit(): void {
     
     if(this.rutaActiva.snapshot.params['tipo'] === 'comprar'){
 
+      this.titulo = 'Comprar producto';
+
       //Hacer aca lo que hay que hacer cuando aprieten comprar en una publicacion
 
-      this.id = this.rutaActiva.snapshot.params['id'];
+      this.idProduct = this.rutaActiva.snapshot.params['id'];
       this.cantidad = this.rutaActiva.snapshot.params['cantidad'];
+      this.idUser = Number(sessionStorage.getItem('idUser'));
+
+      this.productService.getProduct(this.idProduct).subscribe(data => {
+      
+        this.product = data;
+        
+      });
 
       
       return;
@@ -34,21 +52,43 @@ export class ComprarComponent implements OnInit {
 
     if((this.rutaActiva.snapshot.params['tipo'] === 'carrito') ||
        (this.rutaActiva.snapshot.params['tipo'] === 'carrito-reload')){
-      
-      //Hacer aca lo que haria cuando presionen el carrito
 
-      let res: string = '';
+      this.titulo = 'Contenido del carrito';
 
-      for(let item of Carrito.obtenerItems()){
+      this.itemsDelCarrito = Carrito.obtenerItems();
 
-        res = res + item.id+'' + ' ' + item.cantidad + ' ';
-
-      }
-
-      Swal.fire(res);
-
+      this.calcularTotalAPagar();
 
       return;
+
+    }
+
+  }
+
+  precioAPrecioConPuntos(precio: number){
+    return precio.toLocaleString('de-DE');
+  }
+
+  pagar(){
+    Swal.fire('Pagar');
+  }
+
+  eliminarItem(pos : number){
+
+    this.itemsDelCarrito.splice(pos, 1);
+
+    this.calcularTotalAPagar();
+
+  }
+
+  calcularTotalAPagar(){
+
+    this.totalAPagar = 0;
+
+    for(const item of this.itemsDelCarrito){
+
+      this.totalAPagar = this.totalAPagar + (item.cantidad*item.product.precio);
+
     }
 
   }
