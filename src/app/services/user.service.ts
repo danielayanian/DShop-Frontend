@@ -21,6 +21,10 @@ export class UserService {
     return this.httpClient.post<any>(url, param , options);
   }
 
+  public updateUser(url: string, param: any, options: any): Observable<any> {
+    return this.httpClient.post<any>(url, param , options);
+  }
+
   public logout(url: string, options: any): Observable<any>{
     return this.httpClient.post(url , null, options);
   }
