@@ -6,6 +6,8 @@ import { PublicationComponent } from './components/publication/publication.compo
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ComprarComponent } from './components/comprar/comprar.component';
+import { PayComponent } from './components/pay/pay.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 
 export const routes: Routes = [
     {path:"", pathMatch: 'full', redirectTo: 'products-list/inicio'},
@@ -17,5 +19,7 @@ export const routes: Routes = [
     {path:"purchases", component:PurchaseComponent},
     {path:"perfil", component:PerfilComponent},
     {path:"comprar/:tipo/:id/:cantidad", component:ComprarComponent},
-    {path:"comprar/:tipo", component:ComprarComponent}
+    {path:"comprar/:tipo", component:ComprarComponent},
+    {path:"pay/:origen/:total", component:PayComponent},
+    {path:"editar-perfil", component:EditarPerfilComponent}
 ];

@@ -54,6 +54,9 @@ export class PublicationComponent implements OnInit {
 
   comprar(){
     
+    Swal.fire("En la publicacion, antes de hacer navigate a comprar, verificar si está logueado");
+
+
     window.scroll(0, 0);
 
       this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
@@ -85,14 +88,6 @@ export class PublicationComponent implements OnInit {
       timer: 3000,
       background: "#ffffff"
     });
-
-    //Al listar los items usar la posicion de cada uno en el array para identificarlo
-
-    /*for(let item of Carrito.obtenerItems()){
-
-      Swal.fire(item.id+'' + ' ' + item.cantidad);
-
-    }*/
 
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Carrito } from '../../models/carrito';
 import { ProductService } from '../../services/product.service';
@@ -24,7 +24,8 @@ export class ComprarComponent implements OnInit {
   totalAPagar: number = 0;
   posItem : number = -1;
 
-  constructor(private rutaActiva: ActivatedRoute, private productService: ProductService){}
+  constructor(private rutaActiva: ActivatedRoute, private productService: ProductService,
+    private router: Router){}
 
   ngOnInit(): void {
     
@@ -41,14 +42,14 @@ export class ComprarComponent implements OnInit {
       this.productService.getProduct(this.idProduct).subscribe(data => {
       
         this.product = data;
+
+        this.totalAPagar = data.precio*this.cantidad;
         
       });
 
       
       return;
     }
-
-    //if(this.rutaActiva.snapshot.params['tipo'] === 'carrito'){
 
     if((this.rutaActiva.snapshot.params['tipo'] === 'carrito') ||
        (this.rutaActiva.snapshot.params['tipo'] === 'carrito-reload')){
@@ -69,8 +70,22 @@ export class ComprarComponent implements OnInit {
     return precio.toLocaleString('de-DE');
   }
 
-  pagar(){
-    Swal.fire('Pagar');
+  pagar(origen: string){
+    
+    let total = this.precioAPrecioConPuntos(this.totalAPagar);
+
+    if(origen === 'carrito'){
+
+      Swal.fire("En comprar version carrito, antes de hacer navigate a pay, verificar si está logueado");
+
+      this.router.navigate(['pay/carrito/'+total]);
+
+    }else{
+
+      this.router.navigate(['pay/compra/'+total]);
+
+    }    
+
   }
 
   eliminarItem(pos : number){

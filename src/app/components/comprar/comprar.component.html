@@ -69,7 +69,7 @@
 
                     <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5" style="color: black;">
                       Total a pagar: <span class="textoColor-1">${{ precioAPrecioConPuntos(totalAPagar) }}</span>
-                      <button type="submit" (click)="pagar()" class="btn btn-pagar ms-2" 
+                      <button type="submit" (click)="pagar('carrito')" class="btn btn-pagar ms-2" 
                       >Pagar</button>
                     </p>
 
@@ -110,7 +110,7 @@
 
               <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5" style="color: black;">
                 Total a pagar: <span class="textoColor-1">${{ precioAPrecioConPuntos(product.precio*cantidad) }}</span>
-                <button type="submit" (click)="pagar()" class="btn btn-pagar ms-2" 
+                <button type="submit" (click)="pagar('compra')" class="btn btn-pagar ms-2" 
                 >Pagar</button>
               </p>
 

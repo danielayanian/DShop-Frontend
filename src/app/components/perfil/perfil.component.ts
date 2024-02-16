@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { BASE_ENDPOINT } from '../../config/app';
 import { UserDTO } from '../../models/userDTO';
-import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -20,7 +20,7 @@ export class PerfilComponent implements OnInit {
   direccion: string = '';
   telefono: string = '';
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private router: Router){}
 
   ngOnInit(): void {
     
@@ -46,6 +46,14 @@ export class PerfilComponent implements OnInit {
 
   editarPerfil(){
 
+    this.router.navigate(['editar-perfil']);
+
+  }
+
+  ngAfterViewInit(): void {
+
+    window.scroll(0, 0);
+ 
   }
 
 }

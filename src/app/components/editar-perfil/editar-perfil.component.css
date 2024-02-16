@@ -1,0 +1,12 @@
+.btn-editar-perfil {
+    color: #16a085!important;
+    background-color: #FFC300!important;
+    /*border-color: #fff!important;*/
+}
+.btn-editar-perfil:hover {
+    background-color: #FF5733!important;
+    /*border-color: #fff!important;*/
+    color:#DAF7A6!important;
+    box-shadow: none;
+    outline: none;
+}

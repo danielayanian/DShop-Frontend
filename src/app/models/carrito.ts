@@ -1,20 +1,6 @@
 import { ItemCarrito } from "./itemCarrito";
 import { Product } from "./product";
 
-/*export abstract class Carrito {
-
-    public static products: ItemCarrito[] = [];
-
-    public static agregarProducto(id: number, cantidad: number){
-
-        item: ItemCarrito = new ItemCarrito(id, cantidad);
-
-    }
-
-    //Carrito.agregarProducto();
-
-}*/
-
 export class Carrito {
 
     static items: ItemCarrito[] = [];
@@ -35,6 +21,10 @@ export class Carrito {
         return this.items;
     }
 
-    //Carrito.eliminarItem(posicion);
+    static vaciar(){
+
+        this.items = [];
+
+    }
 
 }
