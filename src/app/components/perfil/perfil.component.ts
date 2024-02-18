@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { BASE_ENDPOINT } from '../../config/app';
-import { UserDTO } from '../../models/userDTO';
+import { User } from '../../models/user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,7 +30,7 @@ export class PerfilComponent implements OnInit {
 
     this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
           .subscribe(
-            (data: UserDTO) => {
+            (data: User) => {
 
               this.nombre = data.nombre;
               this.apellido = data.apellido;

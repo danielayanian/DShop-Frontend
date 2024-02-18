@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import swal from 'sweetalert';
 import {HttpHeaders } from '@angular/common/http';
-import { UserDTO } from '../../models/userDTO';
+import { User } from '../../models/user';
 import { BASE_ENDPOINT } from '../../config/app';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
@@ -31,16 +31,27 @@ export class CrearCuentaComponent {
 
   @ViewChild('myInput') myInput: any;
 
-  constructor(private router: Router, private userService: UserService){
+  constructor(private router: Router, private userService: UserService,
+    private formBuilder: FormBuilder){
 
-    this.formularioRegistro = new FormGroup({
+      this.formularioRegistro = formBuilder.group({
+        nombre: ['', Validators.required, Validators.minLength(4)],
+        apellido: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        repitaPassword: ['', Validators.required],
+        terminos: ['']
+      });
+
+
+    /*this.formularioRegistro = new FormGroup({
       nombre: new FormControl("", [Validators.required, Validators.minLength(4)]),
       apellido: new FormControl("", Validators.required),
       email: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required),
       repitaPassword: new FormControl("", Validators.required),
       terminos: new FormControl("")
-    });
+    });*/
 
   }
 
@@ -117,20 +128,20 @@ export class CrearCuentaComponent {
 
     if(this.formularioRegistro.get("terminos")?.value){
 
-      const userDTO: UserDTO = new UserDTO();
-      userDTO.nombre = this.formularioRegistro.get("nombre")?.value;
-      userDTO.apellido = this.formularioRegistro.get("apellido")?.value;
-      userDTO.email = this.formularioRegistro.get("email")?.value;
-      userDTO.password = this.formularioRegistro.get("password")?.value;
-      userDTO.roles = "USER";
+      const user: User = new User();
+      user.nombre = this.formularioRegistro.get("nombre")?.value;
+      user.apellido = this.formularioRegistro.get("apellido")?.value;
+      user.email = this.formularioRegistro.get("email")?.value;
+      user.password = this.formularioRegistro.get("password")?.value;
+      user.roles = "USER";
 
       let options = {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
         withCredentials: true
       };
 
-      this.userService.postRegist(BASE_ENDPOINT+"/registration", userDTO , options)
-      .subscribe((data: UserDTO) => {
+      this.userService.postRegist(BASE_ENDPOINT+"/registration", user , options)
+      .subscribe((data: User) => {
 
           if(data.id > 0){
             this.router.navigate(['/login']);

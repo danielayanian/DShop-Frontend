@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseService } from '../../services/purchase.service';
 import { Purchase } from '../../models/purchase';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
-import { customPaginator } from '../custom-paginator-configuration';
+import { customPaginator } from '../../config/custom-paginator-configuration';
 import { Router } from '@angular/router';
 
 @Component({

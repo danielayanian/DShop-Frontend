@@ -7,9 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
-import Swal from 'sweetalert2';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { switchAll } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',

@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { customPaginator } from '../custom-paginator-configuration';
+import { customPaginator } from '../../config/custom-paginator-configuration';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';

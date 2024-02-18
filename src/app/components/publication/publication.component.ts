@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Carrito } from '../../models/carrito';
-import { ItemCarrito } from '../../models/itemCarrito';
 
 @Component({
   selector: 'app-publication',

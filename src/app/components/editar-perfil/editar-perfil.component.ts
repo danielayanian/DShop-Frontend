@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { UserDTO } from '../../models/userDTO';
+import { User } from '../../models/user';
 import { BASE_ENDPOINT } from '../../config/app';
 import Swal from 'sweetalert2';
 import { HttpHeaders } from '@angular/common/http';
@@ -33,7 +33,7 @@ export class EditarPerfilComponent implements OnInit {
 
   guardar(){
 
-    let userDTO: UserDTO = new UserDTO();
+    let user: User = new User();
 
     let options = {
       withCredentials: true
@@ -41,17 +41,17 @@ export class EditarPerfilComponent implements OnInit {
 
     this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
           .subscribe(
-            (data: UserDTO) => {
+            (data: User) => {
 
-              userDTO.id = data.id;
-              userDTO.password = data.password;
-              userDTO.roles = data.roles;
-              userDTO.nombre = this.formularioEditarPerfil.controls['nombre'].value;
-              userDTO.apellido = this.formularioEditarPerfil.controls['apellido'].value;
-              userDTO.dni = this.formularioEditarPerfil.controls['dni'].value;
-              userDTO.email = this.formularioEditarPerfil.controls['email'].value;
-              userDTO.direccion = this.formularioEditarPerfil.controls['direccion'].value;
-              userDTO.telefono = this.formularioEditarPerfil.controls['telefono'].value;
+              user.id = data.id;
+              user.nombre = this.formularioEditarPerfil.controls['nombre'].value;
+              user.apellido = this.formularioEditarPerfil.controls['apellido'].value;
+              user.dni = this.formularioEditarPerfil.controls['dni'].value;
+              user.email = this.formularioEditarPerfil.controls['email'].value;
+              user.direccion = this.formularioEditarPerfil.controls['direccion'].value;
+              user.telefono = this.formularioEditarPerfil.controls['telefono'].value;
+
+              sessionStorage.setItem('userNombre', user.nombre);
 
               let options2 = {
                 headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -59,7 +59,7 @@ export class EditarPerfilComponent implements OnInit {
                 withCredentials: true
               };
           
-              this.userService.updateUser(BASE_ENDPOINT+"/updateUser", userDTO , options2)
+              this.userService.updateUser(BASE_ENDPOINT+"/updateUser", user , options2)
               .subscribe((data) => {
           
                 Swal.fire({
@@ -101,7 +101,7 @@ export class EditarPerfilComponent implements OnInit {
 
     this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
           .subscribe(
-            (data: UserDTO) => {
+            (data: User) => {
 
               this.formularioEditarPerfil.controls['nombre'].setValue(data.nombre);
               this.formularioEditarPerfil.controls['apellido'].setValue(data.apellido);

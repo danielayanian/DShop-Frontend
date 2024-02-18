@@ -4,7 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BASE_ENDPOINT } from '../../config/app';
-import { UserDTO } from '../../models/userDTO';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
 
           this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options2)
           .subscribe(
-            (data: UserDTO) => {
+            (data: User) => {
 
               sessionStorage.setItem('idUser', data.id+'');
               
