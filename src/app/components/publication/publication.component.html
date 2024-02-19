@@ -43,6 +43,41 @@
                                 </button>
                             </div>
 
+                            @if (campoVacio) {
+
+                                <div class="alert alert-danger d-flex align-items-center mt-4" role="alert">
+                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                  <div>
+                                    Debe ingresar una cantidad
+                                  </div>
+                                </div>
+                              
+                              }@else {
+        
+                                @if (cantidadIncorrecta) {
+        
+                                  <div class="alert alert-danger d-flex align-items-center mt-4" role="alert">
+                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                    <div>
+                                      La cantidad debe ser un número
+                                    </div>
+                                  </div>
+                                
+                                }@else {
+        
+                                    @if (cantidadCero) {
+            
+                                      <div class="alert alert-danger d-flex align-items-center mt-4" role="alert">
+                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        <div>
+                                          La cantidad debe ser mayor que cero
+                                        </div>
+                                      </div>
+                                    
+                                    }
+                                }
+                            }
+
                         </form>
 
                     </div>

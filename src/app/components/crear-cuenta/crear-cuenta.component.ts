@@ -35,23 +35,13 @@ export class CrearCuentaComponent {
     private formBuilder: FormBuilder){
 
       this.formularioRegistro = formBuilder.group({
-        nombre: ['', Validators.required, Validators.minLength(4)],
-        apellido: ['', Validators.required],
-        email: ['', Validators.required],
-        password: ['', Validators.required],
-        repitaPassword: ['', Validators.required],
+        nombre: [''],
+        apellido: [''],
+        email: [''],
+        password: [''],
+        repitaPassword: [''],
         terminos: ['']
       });
-
-
-    /*this.formularioRegistro = new FormGroup({
-      nombre: new FormControl("", [Validators.required, Validators.minLength(4)]),
-      apellido: new FormControl("", Validators.required),
-      email: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required),
-      repitaPassword: new FormControl("", Validators.required),
-      terminos: new FormControl("")
-    });*/
 
   }
 

@@ -23,11 +23,15 @@ export class PublicationComponent implements OnInit {
 
   public formularioPublicacion: FormGroup<any>;
 
-  constructor(private rutaActiva: ActivatedRoute, private productService: ProductService,
-    private router: Router, private fb: FormBuilder){
+  campoVacio: boolean = false;
+  cantidadIncorrecta: boolean = false;
+  cantidadCero: boolean = false;
 
-      this.formularioPublicacion = new FormGroup({
-        cantidad: new FormControl("", Validators.required)
+  constructor(private rutaActiva: ActivatedRoute, private productService: ProductService,
+    private router: Router, private formBuilder: FormBuilder){
+
+      this.formularioPublicacion = formBuilder.group({
+        cantidad: ['']
       });
 
       this.formularioPublicacion.controls['cantidad'].setValue(1);
@@ -53,32 +57,65 @@ export class PublicationComponent implements OnInit {
 
   comprar(){
     
-    Swal.fire("En la publicacion, antes de hacer navigate a comprar, verificar si está logueado");
+    //Swal.fire("En la publicacion, antes de hacer navigate a comprar o a pagar???, verificar si está logueado");
 
+    this.campoVacio = false;
+    this.cantidadIncorrecta = false;
+    this.cantidadCero = false;
+
+    this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
+  
+    if(String(this.cantidad) === ""){
+        this.campoVacio = true;
+        return;
+    }else{
+      this.campoVacio = false;
+    }
+
+    if(String(this.cantidad).match("^[0-9]+$") === null){
+      this.cantidadIncorrecta = true;
+      return;
+    }
+
+    if(Number(this.cantidad) === 0){
+      this.cantidadCero = true;
+      return;
+    }
 
     window.scroll(0, 0);
 
-      this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
-
-      this.router.navigate(['comprar/comprar/' + this.id + '/' + this.cantidad]);
-
-        /*this.productService.listarDestacados().subscribe(data => {
-          this.products = data.content;
-          this.totalItems = data.totalElements;
-          this.encabezado = 'Productos destacados';
-        });*/
-
-      
+    this.router.navigate(['comprar/comprar/' + this.id + '/' + this.cantidad]);
 
     return false;
   }
 
   agregarAlCarrito(){
 
+    this.campoVacio = false;
+    this.cantidadIncorrecta = false;
+    this.cantidadCero = false;
+
     this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
+  
+    if(String(this.cantidad) === ""){
+        this.campoVacio = true;
+        return;
+    }else{
+      this.campoVacio = false;
+    }
+
+    if(String(this.cantidad).match("^[0-9]+$") === null){
+      this.cantidadIncorrecta = true;
+      return;
+    }
+
+    if(Number(this.cantidad) === 0){
+      this.cantidadCero = true;
+      return;
+    }
 
     //Agregar producto al carrito y su cantidad
-    Carrito.agregarItem(this.product, this.cantidad);
+    Carrito.agregarItem(this.product, Number(this.cantidad));
 
     Swal.fire({
       icon: "success",

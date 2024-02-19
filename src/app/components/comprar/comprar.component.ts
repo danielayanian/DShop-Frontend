@@ -36,7 +36,7 @@ export class ComprarComponent implements OnInit {
       //Hacer aca lo que hay que hacer cuando aprieten comprar en una publicacion
 
       this.idProduct = this.rutaActiva.snapshot.params['id'];
-      this.cantidad = this.rutaActiva.snapshot.params['cantidad'];
+      this.cantidad = Number(this.rutaActiva.snapshot.params['cantidad']);
       this.idUser = Number(sessionStorage.getItem('idUser'));
 
       this.productService.getProduct(this.idProduct).subscribe(data => {

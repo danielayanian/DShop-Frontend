@@ -18,7 +18,7 @@
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
           <div class="form-outline flex-fill mb-0">
             <label class="form-label" for="nombre">Nombre</label>
-            <input type="text" formControlName="nombre" id="nombre" class="form-control" style="width: 290px;"/>
+            <input type="text" maxlength="20" formControlName="nombre" id="nombre" class="form-control" style="width: 290px;"/>
           </div>
           </div>
   
@@ -27,16 +27,15 @@
             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
             <label class="form-label" for="apellido">Apellido</label>
-            <input type="text" formControlName="apellido" id="apellido" class="form-control" style="width: 290px;"/>
+            <input type="text" maxlength="20" formControlName="apellido" id="apellido" class="form-control" style="width: 290px;"/>
           </div>
           </div>
 
-          <!-- Password input -->
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
             <label class="form-label" for="dni">DNI</label>
-            <input type="text" formControlName="dni" id="dni" class="form-control" style="width: 290px;"/>
+            <input type="text" maxlength="20" formControlName="dni" id="dni" class="form-control" style="width: 290px;"/>
           </div>
           </div>
 
@@ -50,21 +49,19 @@
           </div>
         </fieldset>
 
-          <!-- Password input -->
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-home fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
             <label class="form-label" for="direccion">Dirección</label>
-            <input type="text" formControlName="direccion" id="direccion" class="form-control" style="width: 290px;"/>
+            <input type="text" maxlength="100" formControlName="direccion" id="direccion" class="form-control" style="width: 290px;"/>
           </div>
           </div>
 
-          <!-- Password input -->
           <div class="d-flex flex-row align-items-center mb-4">
             <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
             <div class="form-outline flex-fill mb-0">
             <label class="form-label" for="telefono">Teléfono</label>
-            <input type="text" formControlName="telefono" id="telefono" class="form-control" style="width: 290px;"/>
+            <input type="text" maxlength="30" formControlName="telefono" id="telefono" class="form-control" style="width: 290px;"/>
           </div>
           </div>
 

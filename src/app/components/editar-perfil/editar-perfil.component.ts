@@ -33,6 +33,8 @@ export class EditarPerfilComponent implements OnInit {
 
   guardar(){
 
+    //Validar como en crear cuenta
+
     let user: User = new User();
 
     let options = {
