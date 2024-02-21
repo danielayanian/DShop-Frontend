@@ -46,6 +46,7 @@ export class PerfilComponent implements OnInit {
 
   editarPerfil(){
 
+    window.scroll(0, 0);
     this.router.navigate(['editar-perfil']);
 
   }

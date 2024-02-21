@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
@@ -16,24 +16,45 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class EditarPerfilComponent implements OnInit {
 
+  public dniIncorrecto = false;
+  public telefonoIncorrecto = false;
+
   public formularioEditarPerfil: FormGroup<any>;
 
-  constructor(private router: Router, private userService: UserService){
+  constructor(private router: Router, private userService: UserService,
+    private formBuilder: FormBuilder){
 
-    this.formularioEditarPerfil = new FormGroup({
-      nombre: new FormControl("", Validators.required),
-      apellido: new FormControl("", Validators.required),
-      dni: new FormControl("", Validators.required),
-      email: new FormControl("", Validators.required),
-      direccion: new FormControl("", Validators.required),
-      telefono: new FormControl("", Validators.required)
+    this.formularioEditarPerfil = formBuilder.group({
+      nombre: [''],
+      apellido: [''],
+      dni: [''],
+      email: [''],
+      direccion: [''],
+      telefono: ['']
     });
 
   }
 
   guardar(){
 
-    //Validar como en crear cuenta
+    this.dniIncorrecto = false;
+    this.telefonoIncorrecto = false;
+
+    let dni = this.formularioEditarPerfil.get("dni")?.value;
+    if(dni !== null){
+      if(dni.match("^[0-9]+$") === null){
+        this.dniIncorrecto = true;
+        return;
+      }
+    }
+    
+    let telefono = this.formularioEditarPerfil.get("telefono")?.value;
+    if(telefono !== null){
+      if(telefono.match("^[0-9]+$") === null){
+        this.telefonoIncorrecto = true;
+        return;
+      }
+    }
 
     let user: User = new User();
 
@@ -88,10 +109,7 @@ export class EditarPerfilComponent implements OnInit {
 
   }
 
-
   ngAfterViewInit(): void {
-    //Set focus to the firstName field
-    //this.myInput.nativeElement.focus();
     window.scroll(0, 0);
   }
 

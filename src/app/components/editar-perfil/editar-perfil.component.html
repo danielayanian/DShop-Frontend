@@ -1,87 +1,123 @@
 <section class="vh-70" style="background-color: #DAF7A6;">
 
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-12 col-xl-11">
-          <div>
-      <div class="card-body p-md-0">
-  
-      <div style="padding-bottom: 10px" class="col d-flex justify-content-center">
-  
-        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-        <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5 textoColor-6">Editar perfil</p>
-  
-        <form [formGroup]="formularioEditarPerfil">
-  
-          <!-- Email input -->
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-          <div class="form-outline flex-fill mb-0">
-            <label class="form-label" for="nombre">Nombre</label>
-            <input type="text" maxlength="20" formControlName="nombre" id="nombre" class="form-control" style="width: 290px;"/>
-          </div>
-          </div>
-  
-          <!-- Password input -->
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-            <label class="form-label" for="apellido">Apellido</label>
-            <input type="text" maxlength="20" formControlName="apellido" id="apellido" class="form-control" style="width: 290px;"/>
-          </div>
-          </div>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div>
+          <div class="card-body p-md-0">
 
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-            <label class="form-label" for="dni">DNI</label>
-            <input type="text" maxlength="20" formControlName="dni" id="dni" class="form-control" style="width: 290px;"/>
-          </div>
-          </div>
+            <div style="padding-bottom: 10px" class="col d-flex justify-content-center">
 
-          <fieldset disabled>
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-            <label class="form-label" for="email">Email</label>
-            <input type="text" formControlName="email" id="email" class="form-control" style="width: 290px;"/>
-          </div>
-          </div>
-        </fieldset>
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h5 fw-bold mb-5 mx-1 mx-md-4 mt-5 textoColor-6">Editar perfil</p>
 
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-home fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-            <label class="form-label" for="direccion">Dirección</label>
-            <input type="text" maxlength="100" formControlName="direccion" id="direccion" class="form-control" style="width: 290px;"/>
-          </div>
-          </div>
+                <form [formGroup]="formularioEditarPerfil">
 
-          <div class="d-flex flex-row align-items-center mb-4">
-            <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
-            <div class="form-outline flex-fill mb-0">
-            <label class="form-label" for="telefono">Teléfono</label>
-            <input type="text" maxlength="30" formControlName="telefono" id="telefono" class="form-control" style="width: 290px;"/>
-          </div>
-          </div>
+                  <fieldset disabled>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="nombre">Nombre</label>
+                        <input type="text" maxlength="20" formControlName="nombre" id="nombre" class="form-control"
+                          style="width: 290px;" />
+                      </div>
+                    </div>
+                  </fieldset>
 
-  
-          <div class="d-flex justify-content-center mx-4 mb-5 mt-5 mb-lg-5">
-            <button type="submit" (click)="guardar()" class="btn btn-editar-perfil" 
-            >Guardar</button>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit" (click)="cancelar()" class="btn btn-editar-perfil" 
-              >Cancelar</button>
+                  <fieldset disabled>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="apellido">Apellido</label>
+                        <input type="text" maxlength="20" formControlName="apellido" id="apellido" class="form-control"
+                          style="width: 290px;" />
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="dni">DNI</label>
+                      <input type="text" maxlength="20" formControlName="dni" id="dni" class="form-control"
+                        style="width: 290px;" />
+                    </div>
+                  </div>
+
+                  <fieldset disabled>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="text" formControlName="email" id="email" class="form-control"
+                          style="width: 290px;" />
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="direccion">Dirección</label>
+                      <input type="text" maxlength="100" formControlName="direccion" id="direccion" class="form-control"
+                        style="width: 290px;" />
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="telefono">Teléfono</label>
+                      <input type="text" maxlength="30" formControlName="telefono" id="telefono" class="form-control"
+                        style="width: 290px;" />
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex justify-content-center mx-4 mb-4 mt-5 mb-lg-4">
+                    <button type="submit" (click)="guardar()" class="btn btn-editar-perfil"
+                    data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Guardar</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" (click)="cancelar()" class="btn btn-editar-perfil"
+                    data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Cancelar</button>
+                  </div>
+
+                  @if (dniIncorrecto) {
+
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                        <use xlink:href="#exclamation-triangle-fill" />
+                      </svg>
+                      <div>
+                        El DNI solo debe contener números
+                      </div>
+                    </div>
+
+                  } @else {
+
+                      @if (telefonoIncorrecto) {
+
+                      <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                          <use xlink:href="#exclamation-triangle-fill" />
+                        </svg>
+                        <div>
+                          El teléfono solo debe contener números
+                        </div>
+                      </div>
+
+                      }
+
+                  }
+
+                </form>
+
+              </div>
+
+            </div>
           </div>
-         
-        </form>
-  
+        </div>
       </div>
-  
-      </div>
-  </div>
-  </div>
-  </div>
-  </div>
     </div>
-  </section>
+  </div>
+</section>
