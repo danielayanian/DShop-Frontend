@@ -18,6 +18,7 @@ export class Purchase {
         this.fecha = fecha;
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
+        this.product = product;
         
     }
 

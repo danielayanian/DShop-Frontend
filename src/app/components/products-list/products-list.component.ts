@@ -3,12 +3,13 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { customPaginator } from '../../config/custom-paginator-configuration';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { BASE_ENDPOINT } from '../../config/app';
 
 @Component({
   selector: 'app-products-list',
@@ -72,7 +73,11 @@ export class ProductsListComponent implements OnInit {
       if((this.rutaActiva.snapshot.params['tipo'] === 'inicio') ||
       (this.rutaActiva.snapshot.params['tipo'] === 'inicio-reload')){
 
-        this.productService.listarDestacados(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString());
+
+        this.productService.listarDestacados(BASE_ENDPOINT+'/listarDestacados', params ).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
           this.encabezado = 'Productos destacados';
@@ -83,7 +88,11 @@ export class ProductsListComponent implements OnInit {
       if((this.rutaActiva.snapshot.params['tipo'] === 'ofertas')||
       (this.rutaActiva.snapshot.params['tipo'] === 'ofertas-reload')){
 
-        this.productService.listarOfertas(this.pageIndex.toString(), this.pageSize.toString()).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString());
+
+        this.productService.listarOfertas(BASE_ENDPOINT+'/listarOfertas', params).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
 
@@ -97,8 +106,12 @@ export class ProductsListComponent implements OnInit {
 
         let palabras: string = sessionStorage.getItem('palabras')!;
 
-        this.productService.listarBusqueda(this.pageIndex.toString(), this.pageSize.toString(),
-        palabras).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString())
+        .set('palabras', palabras);
+
+        this.productService.listarBusqueda(BASE_ENDPOINT+'/listarBusqueda', params).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
 
@@ -113,14 +126,21 @@ export class ProductsListComponent implements OnInit {
 
         let idCategNum: number = Number(sessionStorage.getItem("idCateg"));
 
-        this.productService.listarProductosDeUnaCategoria(this.pageIndex.toString(), this.pageSize.toString(),
-        idCategNum).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString())
+        .set('idCategoria', Number(idCategNum));
+
+        this.productService.listarProductosDeUnaCategoria(BASE_ENDPOINT+'/listarProductosDeUnaCategoria', params).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
 
         });
 
-        this.categoryService.getCategory(idCategNum).subscribe(data => {
+        const params2 = new HttpParams()
+        .set('id', idCategNum);
+
+        this.categoryService.getCategory(BASE_ENDPOINT+'/getCategory', params2).subscribe(data => {
           
           this.category = data;
           this.encabezado = 'Categoría: ' + this.category.nombre;
@@ -139,8 +159,12 @@ export class ProductsListComponent implements OnInit {
 
         let precio = this.formularioListProducts.get("precioModal")?.value;
 
-        this.productService.listarProductosDestPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
-        Number(precio)).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString())
+        .set('precio', Number(precio));
+
+        this.productService.listarProductosDestPorPrecio(BASE_ENDPOINT+'/filtrarDestPorPrecio', params).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
           this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
@@ -155,8 +179,12 @@ export class ProductsListComponent implements OnInit {
 
         let precio = this.formularioListProducts.get("precioModal")?.value;
         
-        this.productService.listarProductosOfertasPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
-        Number(precio)).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString())
+        .set('precio', Number(precio));
+
+        this.productService.listarProductosOfertasPorPrecio(BASE_ENDPOINT+'/filtrarOfertasPorPrecio', params).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
           this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
@@ -173,8 +201,13 @@ export class ProductsListComponent implements OnInit {
 
         let precio = this.formularioListProducts.get("precioModal")?.value;
 
-        this.productService.listarProductosDeUnaCategPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
-        idCategNum, Number(precio)).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString())
+        .set('precio', Number(precio))
+        .set('idCategoria', idCategNum);
+
+        this.productService.listarProductosDeUnaCategPorPrecio(BASE_ENDPOINT+'/filtrarCategPorPrecio', params).subscribe(data => {
 
           this.products = data.content;
           this.totalItems = data.totalElements;
@@ -194,9 +227,13 @@ export class ProductsListComponent implements OnInit {
         let palabras = sessionStorage.getItem('palabras')!;
         let precio = this.formularioListProducts.get("precioModal")?.value;
 
-        //Cambiar esto por el endpoint de busqueda, y pasarle las palabras
-        this.productService.listarBusquedaPorPrecio(this.pageIndex.toString(), this.pageSize.toString(),
-        palabras, Number(precio)).subscribe(data => {
+        const params = new HttpParams()
+        .set('page', this.pageIndex.toString())
+        .set('size', this.pageSize.toString())
+        .set('palabras', palabras)
+        .set('precio', Number(precio));
+
+        this.productService.listarBusquedaPorPrecio(BASE_ENDPOINT+'/filtrarBusquedaPorPrecio', params).subscribe(data => {
           this.products = data.content;
           this.totalItems = data.totalElements;
           this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
@@ -230,7 +267,7 @@ export class ProductsListComponent implements OnInit {
 
   filtrar(){
 
-    let precio = this.formularioListProducts.get("precioModal")?.value;
+    let precio = String(this.formularioListProducts.get("precioModal")?.value);
 
     if(precio.match("^[0-9]+$") === null){
       Swal.fire({

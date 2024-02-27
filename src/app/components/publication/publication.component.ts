@@ -5,6 +5,10 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Carrito } from '../../models/carrito';
+import { HttpParams } from '@angular/common/http';
+import { BASE_ENDPOINT } from '../../config/app';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-publication',
@@ -28,7 +32,8 @@ export class PublicationComponent implements OnInit {
   cantidadCero: boolean = false;
 
   constructor(private rutaActiva: ActivatedRoute, private productService: ProductService,
-    private router: Router, private formBuilder: FormBuilder){
+    private router: Router, private formBuilder: FormBuilder,
+    private userService: UserService){
 
       this.formularioPublicacion = formBuilder.group({
         cantidad: ['']
@@ -43,7 +48,10 @@ export class PublicationComponent implements OnInit {
 
     this.id = this.rutaActiva.snapshot.params['id'];
     
-    this.productService.getProduct(this.id).subscribe(data => {
+    const params = new HttpParams()
+    .set('id', this.id);
+
+    this.productService.getProduct(BASE_ENDPOINT+'/getProduct', params).subscribe(data => {
       
       this.product = data;
       
@@ -56,37 +64,78 @@ export class PublicationComponent implements OnInit {
   }
 
   comprar(){
-    
+
+    let options = {
+      withCredentials: true
+    };
+
+    this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
+          .subscribe({
+            next: (data: User) => {
+
+              this.campoVacio = false;
+              this.cantidadIncorrecta = false;
+              this.cantidadCero = false;
+
+              this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
+            
+              if(this.product.stock < this.cantidad){
+
+                Swal.fire({
+                  icon: "error",
+                  title: "No hay stock suficiente!!!",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  background: "#ffffff"
+                });
+
+                return;
+
+              }
+
+              if(String(this.cantidad) === ""){
+                  this.campoVacio = true;
+                  return;
+              }else{
+                this.campoVacio = false;
+              }
+
+              if(String(this.cantidad).match("^[0-9]+$") === null){
+                this.cantidadIncorrecta = true;
+                return;
+              }
+
+              if(Number(this.cantidad) === 0){
+                this.cantidadCero = true;
+                return;
+              }
+
+              window.scroll(0, 0);
+
+              this.router.navigate(['comprar/comprar/' + this.id + '/' + this.cantidad]);
+
+              return false;
+
+            },
+            error: () => {
+              sessionStorage.setItem('userLogueado', 'false');
+              
+              Swal.fire({
+                icon: "error",
+                title: "Antes de poder comprar debe loguearse",
+                showConfirmButton: false,
+                timer: 3000,
+                background: "#ffffff"
+              });
+
+              return;
+
+            }
+          });
+
     //Swal.fire("En la publicacion, antes de hacer navigate a comprar o a pagar???, verificar si está logueado");
 
-    this.campoVacio = false;
-    this.cantidadIncorrecta = false;
-    this.cantidadCero = false;
-
-    this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
-  
-    if(String(this.cantidad) === ""){
-        this.campoVacio = true;
-        return;
-    }else{
-      this.campoVacio = false;
-    }
-
-    if(String(this.cantidad).match("^[0-9]+$") === null){
-      this.cantidadIncorrecta = true;
-      return;
-    }
-
-    if(Number(this.cantidad) === 0){
-      this.cantidadCero = true;
-      return;
-    }
-
-    window.scroll(0, 0);
-
-    this.router.navigate(['comprar/comprar/' + this.id + '/' + this.cantidad]);
-
-    return false;
+    
   }
 
   agregarAlCarrito(){
@@ -97,6 +146,20 @@ export class PublicationComponent implements OnInit {
 
     this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
   
+    if(this.product.stock < this.cantidad){
+
+      Swal.fire({
+        icon: "error",
+        title: "No hay stock suficiente!!!",
+        showConfirmButton: false,
+        timer: 3000,
+        background: "#ffffff"
+      });
+
+      return;
+
+    }
+
     if(String(this.cantidad) === ""){
         this.campoVacio = true;
         return;

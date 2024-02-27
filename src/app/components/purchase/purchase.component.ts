@@ -4,6 +4,9 @@ import { Purchase } from '../../models/purchase';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { customPaginator } from '../../config/custom-paginator-configuration';
 import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
+import { BASE_ENDPOINT } from '../../config/app';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-purchase',
@@ -31,18 +34,34 @@ export class PurchaseComponent implements OnInit {
 
   loadPurchases(){
 
-    this.purchaseService.listarComprasDeUnUsuario(this.pageIndex.toString(), this.pageSize.toString(),
-    Number(this.idUser)).subscribe((data) => {
+    const params = new HttpParams()
+    .set('page', this.pageIndex.toString())
+    .set('size', this.pageSize.toString())
+    .set('idUser', Number(this.idUser));
 
-      this.purchases = data.content;
-      this.totalItems = data.totalElements;
+    const options = {
+      params: params,
+      withCredentials: true
+    };
 
-      if(this.totalItems === 0){
-        this.hayCompras = false;
-      }else{
-        this.hayCompras = true;
+    this.purchaseService.listarComprasDeUnUsuario(BASE_ENDPOINT+'/listarComprasDeUnUsuario', options)
+    .subscribe({
+      next: (data) => {
+
+        this.purchases = data.content;
+        this.totalItems = data.totalElements;
+  
+        if(this.totalItems === 0){
+          this.hayCompras = false;
+        }else{
+          this.hayCompras = true;
+        }
+
+      },
+      error: () => {
+        sessionStorage.setItem('userLogueado', 'false');
+        this.router.navigate(['login']);
       }
-
     });
 
   }

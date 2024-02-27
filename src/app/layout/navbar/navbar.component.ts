@@ -8,6 +8,7 @@ import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -107,7 +108,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.categoryService.getCategories()
+    this.categoryService.getCategories(BASE_ENDPOINT+'/getCategories')
     .subscribe(
       (data) => {
 

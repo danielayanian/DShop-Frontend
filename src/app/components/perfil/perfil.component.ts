@@ -29,8 +29,8 @@ export class PerfilComponent implements OnInit {
     };
 
     this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
-          .subscribe(
-            (data: User) => {
+          .subscribe({
+            next: (data: User) => {
 
               this.nombre = data.nombre;
               this.apellido = data.apellido;
@@ -39,8 +39,12 @@ export class PerfilComponent implements OnInit {
               this.direccion = data.direccion;
               this.telefono = data.telefono;
 
+            },
+            error: () => {
+              sessionStorage.setItem('userLogueado', 'false');
+              this.router.navigate(['login']);
             }
-          );
+          });
 
   }
 

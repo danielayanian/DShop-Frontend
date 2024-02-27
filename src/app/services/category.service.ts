@@ -1,7 +1,6 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BASE_ENDPOINT } from "../config/app";
 
   @Injectable({
     providedIn: 'root'
@@ -14,14 +13,12 @@ import { BASE_ENDPOINT } from "../config/app";
       this.http = http;
     }
   
-    public getCategories(): Observable<any>{
-        return this.http.get<any>(BASE_ENDPOINT+'/getCategories', {});
+    public getCategories(url: string): Observable<any>{
+        return this.http.get<any>(url, {});
     }
 
-    public getCategory(id: number): Observable<any>{
-      const params = new HttpParams()
-      .set('id', id);
-      return this.http.get<any>(BASE_ENDPOINT+'/getCategory', {params: params});
+    public getCategory(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
 }

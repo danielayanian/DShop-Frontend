@@ -1,9 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BASE_ENDPOINT } from "../config/app";
-import { Product } from "../models/product";
-import Swal from "sweetalert2";
 
   @Injectable({
     providedIn: 'root'
@@ -18,79 +15,44 @@ import Swal from "sweetalert2";
       this.http = http;
     }
 
-    public listarDestacados(page: string, size: string): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarDestacados', {params: params});
+    public listarDestacados(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarOfertas(page: string, size: string): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarOfertas', {params: params});
+    public listarOfertas(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarProductosDeUnaCategoria(page: string, size: string, idCategoria: number): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('idCategoria', idCategoria);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarProductosDeUnaCategoria', {params: params});
+    public listarProductosDeUnaCategoria(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
+    }
+    
+    public listarBusqueda(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarBusqueda(page: string, size: string, palabras: string): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('palabras', palabras);
-      return this.http.get<any>(BASE_ENDPOINT+'/listarBusqueda', {params: params});
+    public listarProductosDestPorPrecio(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarProductosDestPorPrecio(page: string, size: string, 
-      precio: number): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('precio', precio);
-      return this.http.get<any>(BASE_ENDPOINT+'/filtrarDestPorPrecio', {params: params});
+    public listarProductosOfertasPorPrecio(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarProductosOfertasPorPrecio(page: string, size: string, 
-      precio: number): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('precio', precio);
-      return this.http.get<any>(BASE_ENDPOINT+'/filtrarOfertasPorPrecio', {params: params});
+    public listarProductosDeUnaCategPorPrecio(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarProductosDeUnaCategPorPrecio(page: string, size: string, idCategoria: number,
-      precio: number): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('precio', precio)
-      .set('idCategoria', idCategoria);
-      return this.http.get<any>(BASE_ENDPOINT+'/filtrarCategPorPrecio', {params: params});
+    public listarBusquedaPorPrecio(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public listarBusquedaPorPrecio(page: string, size: string, palabras: string, 
-      precio: number): Observable<any>{
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('palabras', palabras)
-      .set('precio', precio);
-      return this.http.get<any>(BASE_ENDPOINT+'/filtrarBusquedaPorPrecio', {params: params});
+    public getProduct(url: string, params: any): Observable<any>{
+      return this.http.get<any>(url, {params: params});
     }
 
-    public getProduct(id: number): Observable<any>{
-      //Swal.fire(id+'');
-      const params = new HttpParams()
-      .set('id', id);
-      return this.http.get<any>(BASE_ENDPOINT+'/getProduct', {params: params});
+    public updateProduct(url: string, param: any, options: any): Observable<any>{
+      return this.http.post<any>(url, param, options);
     }
 
 }

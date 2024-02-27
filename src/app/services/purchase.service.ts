@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BASE_ENDPOINT } from "../config/app";
+import { Purchase } from "../models/purchase";
 
 @Injectable({
     providedIn: 'root'
@@ -9,19 +9,13 @@ import { BASE_ENDPOINT } from "../config/app";
   export class PurchaseService {
   
     constructor(private httpClient: HttpClient) { }
-  
-    public listarComprasDeUnUsuario(page: string, size: string, idUser: number): Observable<any> {
-      const params = new HttpParams()
-      .set('page', page)
-      .set('size', size)
-      .set('idUser', idUser);
 
-      const httpOptions = {
-        params: params,
-        withCredentials: true
-      };
+    public listarComprasDeUnUsuario(url: string, options: any): Observable<any> {
+      return this.httpClient.get<any>(url, options);
+    }
 
-      return this.httpClient.get<any>(BASE_ENDPOINT+'/listarComprasDeUnUsuario', httpOptions);
+    public agregarCompraDeUnUsuario(url: string, purchase: Purchase, options: any): Observable<any> {
+      return this.httpClient.post<any>(url, purchase, options);
     }
 
 }
