@@ -1,3 +1,1 @@
-//export const BASE_ENDPOINT = 'http://localhost:3030';
-
-export const BASE_ENDPOINT = 'https://e15c-2800-2130-4340-afd-6164-2c0-74c5-8011.ngrok-free.app';
+export const BASE_ENDPOINT = 'http://localhost:3030';
