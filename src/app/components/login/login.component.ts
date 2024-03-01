@@ -8,6 +8,7 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -64,14 +65,14 @@ export class LoginComponent implements OnInit {
       responseType: 'text' as 'text',
       withCredentials: true
     };
-
+  
     this.userService.postLogin(BASE_ENDPOINT+"/login", body.toString(), options)
     .subscribe(
       (data) => {
         if (data.includes("Login correcto")) {
 
           sessionStorage.setItem('userLogueado', 'true');
-
+          
           Swal.fire({
             icon: "success",
             title: "Usted ha iniciado sesión correctamente!!!",
@@ -87,6 +88,7 @@ export class LoginComponent implements OnInit {
           }
 
           let options2 = {
+            //headers: new HttpHeaders().set('ngrok-skip-browser-warning', '14141'),
             withCredentials: true
           };
 
