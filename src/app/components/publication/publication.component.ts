@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Carrito } from '../../models/carrito';
 import { HttpParams } from '@angular/common/http';
 import { BASE_ENDPOINT } from '../../config/app';
@@ -20,13 +20,9 @@ import { User } from '../../models/user';
 export class PublicationComponent implements OnInit {
 
   id: number = 0;
-
   cantidad: number = 0;
-
   product: Product = new Product(0, "", "", "", 0, 0, 0);
-
   public formularioPublicacion: FormGroup<any>;
-
   campoVacio: boolean = false;
   cantidadIncorrecta: boolean = false;
   cantidadCero: boolean = false;
@@ -68,19 +64,14 @@ export class PublicationComponent implements OnInit {
     let options = {
       withCredentials: true
     };
-
     this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
           .subscribe({
             next: (data: User) => {
-
               this.campoVacio = false;
               this.cantidadIncorrecta = false;
               this.cantidadCero = false;
-
               this.cantidad = this.formularioPublicacion.get("cantidad")?.value;
-            
               if(this.product.stock < this.cantidad){
-
                 Swal.fire({
                   icon: "error",
                   title: "No hay stock suficiente!!!",
@@ -88,9 +79,7 @@ export class PublicationComponent implements OnInit {
                   timer: 3000,
                   background: "#ffffff"
                 });
-
                 return;
-
               }
 
               if(String(this.cantidad) === ""){
@@ -111,15 +100,12 @@ export class PublicationComponent implements OnInit {
               }
 
               window.scroll(0, 0);
-
               this.router.navigate(['comprar/comprar/' + this.id + '/' + this.cantidad]);
-
               return false;
 
             },
             error: () => {
               sessionStorage.setItem('userLogueado', 'false');
-              
               Swal.fire({
                 icon: "error",
                 title: "Antes de poder comprar debe loguearse",
@@ -127,14 +113,9 @@ export class PublicationComponent implements OnInit {
                 timer: 3000,
                 background: "#ffffff"
               });
-
               return;
-
             }
           });
-
-    //Swal.fire("En la publicacion, antes de hacer navigate a comprar o a pagar???, verificar si está logueado");
-
     
   }
 

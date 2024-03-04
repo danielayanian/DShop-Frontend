@@ -29,11 +29,8 @@ export class ProductsListComponent implements OnInit {
   pageIndex = 0;
   totalItems = 0;
   pageSizeOptions: number[] = [6, 12, 24, 36];
-
   encabezado: string = '';
-
   precioMax: string = '';
-
   category: Category = new Category(0, '');
 
   public formularioListProducts: FormGroup<any>;
@@ -149,10 +146,7 @@ export class ProductsListComponent implements OnInit {
 
     }
 
-
-
-
-    ////Seguir aca con los filtros, uno por cada tipo
+    //Aca los filtros, uno por cada tipo
 
     if((this.rutaActiva.snapshot.params['tipo'] === 'inicioFilter') ||
         (this.rutaActiva.snapshot.params['tipo'] === 'inicioFilter-reload')){
@@ -213,8 +207,6 @@ export class ProductsListComponent implements OnInit {
           this.totalItems = data.totalElements;
           this.precioMax = '(Precio <= $' + this.precioAPrecioConPuntos(Number(precio)) + ')';
 
-          //Swal.fire(this.products[2].titulo);
-
         });
 
         this.closebutton.nativeElement.click();
@@ -242,8 +234,6 @@ export class ProductsListComponent implements OnInit {
         this.closebutton.nativeElement.click();
 
       }
-
-
 
   }
 
@@ -319,7 +309,6 @@ export class ProductsListComponent implements OnInit {
 
     }
 
-    //Falta el de la busqueda
     if((this.router.url === '/products-list/searchFilter') ||
        (this.router.url === '/products-list/searchFilter-reload') ||
        (this.router.url === '/products-list/search') ||

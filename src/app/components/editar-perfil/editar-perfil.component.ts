@@ -97,7 +97,6 @@ export class EditarPerfilComponent implements OnInit {
           
               });
 
-
             }
           );
     
@@ -132,8 +131,6 @@ export class EditarPerfilComponent implements OnInit {
 
             }
           );
-
-    
 
   }
 

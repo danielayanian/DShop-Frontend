@@ -41,20 +41,15 @@ export class ComprarComponent implements OnInit {
     if(this.rutaActiva.snapshot.params['tipo'] === 'comprar'){
 
       this.titulo = 'Comprar producto';
-
       this.idProduct = this.rutaActiva.snapshot.params['id'];
       this.cantidad = Number(this.rutaActiva.snapshot.params['cantidad']);
       this.idUser = Number(sessionStorage.getItem('idUser'));
 
       const params = new HttpParams()
       .set('id', this.idProduct);
-
       this.productService.getProduct(BASE_ENDPOINT+'/getProduct', params).subscribe(data => {
-      
         this.product = data;
-
         this.totalAPagar = data.precio*this.cantidad;
-        
       });
 
       return;
@@ -64,44 +59,33 @@ export class ComprarComponent implements OnInit {
        (this.rutaActiva.snapshot.params['tipo'] === 'carrito-reload')){
         
       this.titulo = 'Contenido del carrito';
-
       this.itemsDelCarrito = Carrito.obtenerItems();
-
       //Sumar unidades de productos con el mismo id
       let itemsUnificados: ItemCarrito[] = [];
-      
       let i = 0;
-
       let agregar: boolean = true;
 
       for(const item of this.itemsDelCarrito){
-    
         i = 0;
         for(const itemUnif of itemsUnificados){
-          
           if(item.product.id === itemUnif.product.id){
             agregar = false;
             break
           }else{
             agregar = true;
             i++;
-            
           }
-
         }
         if(agregar){
           itemsUnificados.push(new ItemCarrito(item.product, item.cantidad));
         }else{
           itemsUnificados[i].cantidad = itemsUnificados[i].cantidad + item.cantidad;
         }
-
       }
 
       this.itemsDelCarrito = itemsUnificados;
       Carrito.items = itemsUnificados;
-
       this.calcularTotalAPagar();
-
       return;
 
     }
@@ -117,18 +101,14 @@ export class ComprarComponent implements OnInit {
     let options = {
       withCredentials: true
     };
-
     this.userService.getUser(BASE_ENDPOINT+"/api/user/single", options)
           .subscribe({
             next: (data: User) => {
-
               this.idUser = data.id;
               this.pagarLogueado(origen);
-
             },
             error: () => {
               sessionStorage.setItem('userLogueado', 'false');
-              
               Swal.fire({
                 icon: "error",
                 title: "Antes de poder comprar debe loguearse",
@@ -136,9 +116,7 @@ export class ComprarComponent implements OnInit {
                 timer: 3000,
                 background: "#ffffff"
               });
-
               return;
-
             }
           });
 
@@ -147,32 +125,20 @@ export class ComprarComponent implements OnInit {
   pagarLogueado(origen: string){
 
     let total = this.precioAPrecioConPuntos(this.totalAPagar);
-
     if(origen === 'carrito'){
-
       this.sinStock = false;
-
       let j: number = 0;
-
       for(const item of this.itemsDelCarrito){
-
         const params = new HttpParams()
         .set('id', item.product.id);
-
         this.productService.getProduct(BASE_ENDPOINT+'/getProduct', params).subscribe((data: Product) => {
-
           j++;
-
           if(Number(data.stock) < Number(item.cantidad)){
-  
             this.sinStock = true;
-
           }
-
           if(this.itemsDelCarrito.length === j){
 
             if(this.sinStock){
-
               Swal.fire({
                 icon: "error",
                 title: "No hay stock suficiente de algún producto!!!",
@@ -180,54 +146,31 @@ export class ComprarComponent implements OnInit {
                 timer: 3000,
                 background: "#ffffff"
               });
-            
             }else{
-              
               for(const item of this.itemsDelCarrito){
-      
                 const params = new HttpParams()
                 .set('id', item.product.id);
-      
                 this.productService.getProduct(BASE_ENDPOINT+'/getProduct', params).subscribe(data => {
       
                   this.stock = Number(data.stock) - Number(item.cantidad);
                   item.product.stock = this.stock;
-                  
-                  /*if(item.product.stock < 0){
-
-                    Swal.fire({
-                      icon: "error",
-                      title: "No hay stock suficiente de algún producto!!!",
-                      showConfirmButton: false,
-                      timer: 3000,
-                      background: "#ffffff"
-                    });
       
-                  }else{*/
+                  let options = {
+                    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+                    responseType: 'text' as 'text',
+                    withCredentials: true
+                  };
+                  this.productService.updateProduct(BASE_ENDPOINT+'/updateProduct', item.product, options).subscribe();
       
-                    let options = {
-                      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-                      responseType: 'text' as 'text',
-                      withCredentials: true
-                    };
-            
-                    this.productService.updateProduct(BASE_ENDPOINT+'/updateProduct', item.product, options).subscribe();
-      
-                    let options2 = {
-                      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-                      responseType: 'text' as 'text',
-                      withCredentials: true
-                    };
-
-                    //Agregar compra
-                    let purchase = new Purchase(0, this.idUser, item.product.id, '', item.cantidad,
-                      item.product.precio, item.product);
-                    this.purchaseService.agregarCompraDeUnUsuario(BASE_ENDPOINT+'/addPurchase', purchase, options2).subscribe();
-
-
-                    //this.router.navigate(['pay/carrito/'+total]);
-      
-                  /*}*/
+                  let options2 = {
+                    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+                    responseType: 'text' as 'text',
+                    withCredentials: true
+                  };
+                  //Agregar compra
+                  let purchase = new Purchase(0, this.idUser, item.product.id, '', item.cantidad,
+                    item.product.precio, item.product);
+                  this.purchaseService.agregarCompraDeUnUsuario(BASE_ENDPOINT+'/addPurchase', purchase, options2).subscribe();
                   
                 });
       
@@ -236,19 +179,14 @@ export class ComprarComponent implements OnInit {
               this.router.navigate(['pay/carrito/'+total]);
       
             }
-
           }
-
         });
-
       }
 
     }else{
 
       this.product.stock = Number(this.product.stock) - Number(this.cantidad);
-
       if(Number(this.product.stock) < 0){
-
         Swal.fire({
           icon: "error",
           title: "No hay stock suficiente!!!",
@@ -256,9 +194,7 @@ export class ComprarComponent implements OnInit {
           timer: 3000,
           background: "#ffffff"
         });
-
       }else{
-
         let options: any = {
           headers: new HttpHeaders().set('Content-Type', 'application/json'),
           responseType: 'text' as 'text',
@@ -273,27 +209,18 @@ export class ComprarComponent implements OnInit {
           responseType: 'text' as 'text',
           withCredentials: true
         };
-
         let purchase = new Purchase(0, this.idUser, this.product.id, '', this.cantidad,
                       this.product.precio, this.product);
         this.purchaseService.agregarCompraDeUnUsuario(BASE_ENDPOINT+'/addPurchase', purchase, options2).subscribe();
-
-
-
         this.router.navigate(['pay/compra/'+total]);
-
       }
-      
     }
-
   }
 
   eliminarItem(pos : number){
 
     this.cantidad = 0;
-
     this.itemsDelCarrito.splice(pos, 1);
-
     this.calcularTotalAPagar();
 
   }
@@ -301,11 +228,8 @@ export class ComprarComponent implements OnInit {
   calcularTotalAPagar(){
 
     this.totalAPagar = 0;
-
     for(const item of this.itemsDelCarrito){
-
       this.totalAPagar = this.totalAPagar + (item.cantidad*item.product.precio);
-
     }
 
   }

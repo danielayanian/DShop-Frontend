@@ -6,7 +6,6 @@ import { customPaginator } from '../../config/custom-paginator-configuration';
 import { Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { BASE_ENDPOINT } from '../../config/app';
-import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-purchase',
@@ -20,17 +19,15 @@ import { catchError, tap } from 'rxjs';
 })
 export class PurchaseComponent implements OnInit {
   
-  constructor(private purchaseService: PurchaseService, private router: Router){}
-
   purchases: Purchase[] = [];
   pageSize = 6;
   pageIndex = 0;
   totalItems = 0;
   pageSizeOptions: number[] = [6, 12, 24, 36];
-
   hayCompras : boolean = false;
-
   idUser: string = '';
+
+  constructor(private purchaseService: PurchaseService, private router: Router){}
 
   loadPurchases(){
 
@@ -43,14 +40,11 @@ export class PurchaseComponent implements OnInit {
       params: params,
       withCredentials: true
     };
-
     this.purchaseService.listarComprasDeUnUsuario(BASE_ENDPOINT+'/listarComprasDeUnUsuario', options)
     .subscribe({
       next: (data) => {
-
         this.purchases = data.content;
         this.totalItems = data.totalElements;
-  
         if(this.totalItems === 0){
           this.hayCompras = false;
         }else{

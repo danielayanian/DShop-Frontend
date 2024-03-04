@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import swal from 'sweetalert';
+import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import {HttpHeaders } from '@angular/common/http';
 import { User } from '../../models/user';
 import { BASE_ENDPOINT } from '../../config/app';
