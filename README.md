@@ -1,7 +1,5 @@
 # DShop-Frontend con Angular 17
 
----
-
 <h4>Dshop es una aplicación de e-commerce realizada íntegramente por mi (Daniel Ayanian), con el objetivo de que los recruiters puedan comprobar mi nivel de
 conocimientos de Full Stack. Esta aplicación fue realizada entre finales de 2023 y principios de 2024, con las últimas tecnologías y versiones existentes a la fecha.</h4> 
 
@@ -53,19 +51,17 @@ __Captura de pantalla de la aplicación DShop:__
 
 __Videos de la App:__
 
+[[Video del funcionamiento de la App]](https://www.youtube.com/watch?v=ayL5fwCMq5Y&ab_channel=DanielAyanian)
+<br><br>
+[[Video del funcionamiento Responsive de la App]](https://www.youtube.com/watch?v=so6rABXrgnk&ab_channel=DanielAyanian)
+<br><br>
+[[Video de la estructura del frontend de la App]](https://www.youtube.com/watch?v=Qu2LwlMTeTU&ab_channel=DanielAyanian)
+<br><br>
+[[Video de la estructura del backend de la App]](https://www.youtube.com/watch?v=4GIF9WMgzos&ab_channel=DanielAyanian)
+<br><br>
+[[Video del funcionamiento de Spring Security visto desde el frontend]](https://www.youtube.com/watch?v=6TjhXdmpZqU&ab_channel=DanielAyanian)
+<br><br>
+[[Video del funcionamiento de Spring Security visto desde el backend]](https://www.youtube.com/watch?v=d0e-gps367s&ab_channel=DanielAyanian)
 <br>
-
-[![Video del funcionamiento de la App]](https://www.youtube.com/watch?v=ayL5fwCMq5Y&ab_channel=DanielAyanian)
-<br><br>
-[![Video del funcionamiento Responsive de la App]](https://www.youtube.com/watch?v=so6rABXrgnk&ab_channel=DanielAyanian)
-<br><br>
-[![Video de la estructura del frontend de la App]](https://www.youtube.com/watch?v=Qu2LwlMTeTU&ab_channel=DanielAyanian)
-<br><br>
-[![Video de la estructura del backend de la App]](https://www.youtube.com/watch?v=4GIF9WMgzos&ab_channel=DanielAyanian)
-<br><br>
-[![Video del funcionamiento de Spring Security visto desde el frontend]](https://www.youtube.com/watch?v=6TjhXdmpZqU&ab_channel=DanielAyanian)
-<br><br>
-[![Video del funcionamiento de Spring Security visto desde el backend]](https://www.youtube.com/watch?v=d0e-gps367s&ab_channel=DanielAyanian)
-<br><br>
 
 ----
