@@ -34,7 +34,12 @@ Clona el repositorio del backend o descarga el zip del mismo, descomprímelo en 
 [Link al Backend](https://github.com/danielayanian/DShop-Backend/ "Link al Backend")
 
 Debes además tener corriendo en tu equipo MySQL, y cuando el backend se ejecute por primera vez se creará la base de datos si no existe, las tablas correspondientes, y se cargarán algunos registros iniciales en las mismas. Todo esto se realizará utilizando Spring Data JPA.
-
+<br><br>
+Para probar la aplicación, podés crearte un nuevo usuario, o utilizar el siguiente usuario ya existente:
+<br>
+Usuario: user@gmail.com
+<br>
+Password: Dan-1234
 
 
 ------------
