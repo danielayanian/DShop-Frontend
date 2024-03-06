@@ -1,19 +1,19 @@
 # DShop-Frontend con Angular 17
 
-<h4>Dshop es una aplicación de e-commerce realizada íntegramente por mi (Daniel Ayanian), con el objetivo de que los recruiters puedan comprobar mi nivel de
-conocimientos de Full Stack. Esta aplicación fue realizada entre finales de 2023 y principios de 2024, con las últimas tecnologías y versiones existentes a la fecha.</h4> 
+<h4>DShop es una aplicación de e-commerce realizada íntegramente por mi (Daniel Ayanian), con el objetivo de que los recruiters puedan comprobar mi nivel de
+conocimientos de Full Stack. Esta aplicación fue realizada entre finales de 2023 y principios de 2024, con las últimas tecnologías y versiones existentes a la fecha. La aplicación es 100% responsive, es decir, puede visualizarse perfectamente tanto en una computadora de escritorio como en un dispositivo móvil.</h4>
 
 ---
 
-__Tecnologías utilizadas:__ Angular 17, HTML5, CSS3, JavaScript (TypeScript), Bootstrap 5.3.2, Sweetalert2, Java 18, SpringBoot 3.2, Spring Security 6, Spring Data JPA y MySQL 8.
+__Tecnologías utilizadas:__ Angular 17, HTML5, CSS3, JavaScript (TypeScript), Bootstrap 5.3.2, Sweetalert2, Java 18, SpringBoot 3.2, Spring Security 6, Spring Data JPA, MySQL 8, Maven y Lombok.
 
 
 ---
 
 __Descripción de la aplicación DShop:__
 
-DShop es una tienda virtual o e-commerce para la venta de productos de vestimenta masculina. La misma cuenta con un registro de usuario y un login, para los cuales te utilizó
-Spring Security 6. Los passwords se almacenan encriptados en una Base de Datos MySQL 8, y los endpoints de los controllers de SpringBoot 3.2 que necesitan solo poder accedidos por
+DShop es una tienda virtual o e-commerce para la venta de productos de vestimenta masculina. La misma cuenta con un registro de usuario y un login, para los cuales se utilizó
+Spring Security 6. Los passwords se almacenan encriptados en una Base de Datos MySQL 8, y los endpoints de los controllers de SpringBoot 3.2 que necesitan solo poder ser accedidos por
 usuarios logueados con ciertos roles (ADMIN o USER) se encuentran protegidos al acceso público. Los usuarios pueden ver listados de productos marcados como destacados, o como ofertas.
 Además, pueden ver listados productos de una categoría específica, como ser remeras, pantalones, buzos, camperas o medias. También, los usuarios pueden hacer búsquedas de productos ingresando ciertas palabras en un cuadro destinado para tal fin, cuyos resultados están ordenados de más a menos relevante. Un usuario podrá hacer una compra de un producto directamente, o agregar varios productos en un carrito de compras, y pagar todo junto cuando lo desee. Además, puede seleccionar la cantidad de unidades que desea comprar de cada producto, siempre y cuando no se exceda en el stock disponible de dicho producto. El usuario podrá ver los datos de su perfil y editarlos cuando lo desee. También podrá ver un listado de todo su historial de compras realizadas en la tienda. La tienda cuenta además con una ventana modal con preguntas frecuentes y con un chatBot con IA. Por último, el usuario podrá aplicar un filtro en cualquiera de los listados de productos indicando el precio máximo de todos los productos a mostrar.
 
